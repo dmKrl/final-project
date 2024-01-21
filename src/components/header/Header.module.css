@@ -9,6 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: end;
+    gap: 24px;
 }
 .headerBtnMainEnter {
     width: 224px;
