@@ -1,8 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import HeadingH3 from '../heading-h3/HeadingH3';
 import s from './MainAdv.module.css';
+import ButtonShowNum from '../button-show-num/ButtonShowNum';
+import ButtonChangeAdv from '../button-change-adv/ButtonChangeAdv';
 
 function MainAdv() {
+    const loaction = useLocation();
     return (
         <div>
             <div className={s.mainArtic}>
@@ -51,10 +54,12 @@ function MainAdv() {
                             </Link>
                         </div>
                         <p className={s.articlePrice}>2 200 ₽</p>
-                        <button type="button" className={s.articleBtn}>
-                            Показать телефон
-                            <span>8 905 XXX XX XX</span>
-                        </button>
+                        {loaction.pathname === '/adv-page' ? (
+                            <ButtonShowNum />
+                        ) : (
+                            <ButtonChangeAdv />
+                        )}
+
                         <div className={s.articleAuthor}>
                             <div className={s.authorImg}>
                                 <img src="" alt="" />
