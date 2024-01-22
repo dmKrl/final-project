@@ -65,7 +65,10 @@ function MainAdv() {
                                 <img src="" alt="" />
                             </div>
                             <div className={s.authorCont}>
-                                <Link to="/" className={s.authorName}>
+                                <Link
+                                    to="/seller-profile"
+                                    className={s.authorName}
+                                >
                                     Кирилл
                                 </Link>
                                 <p className={s.authorAbout}>
