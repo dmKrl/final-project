@@ -11,7 +11,7 @@ function CardItem(props) {
                     </Link>
                 </div>
                 <div className={s.cardContent}>
-                    <Link to="/" className="">
+                    <Link to="/adv-page" className="">
                         <h3 className={s.cardTitle}>{props.text}</h3>
                     </Link>
                     <p className={s.cardPrice}>{props.price}</p>

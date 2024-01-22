@@ -4,6 +4,7 @@ import ProfilePage from './pages/profile-page/ProfilePage';
 import AuthPage from './pages/auth-page/AuthPage';
 import AdsPage from './pages/ads-page/AdsPage';
 import RegistrationPage from './pages/registration-page/RegistrationPage';
+import AdvPage from './pages/adv-page/AdvPage';
 
 function AppRoutes() {
     return (
@@ -12,6 +13,7 @@ function AppRoutes() {
             <Route path="/registration" element={<RegistrationPage />} />
             <Route path="/" element={<MainPage />}>
                 <Route path="/" element={<AdsPage />} />
+                <Route path="/adv-page" element={<AdvPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
             </Route>
         </Routes>

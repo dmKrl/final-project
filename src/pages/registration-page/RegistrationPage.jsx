@@ -36,28 +36,30 @@ function RegistrationPage() {
                             placeholder="Повторите пароль"
                         />
                         <input
-                            className={`${s.modalInputSignup} modal__input password`}
-                            type="password"
-                            name="password"
+                            className={`${s.modalInputSignup} modal__input`}
+                            type="text"
+                            name="first-name"
                             placeholder="Имя (необязательно)"
                         />
                         <input
-                            className={`${s.modalInputSignup} modal__input password`}
-                            type="password"
-                            name="password"
+                            className={`${s.modalInputSignup} modal__input`}
+                            type="text"
+                            name="last-name"
                             placeholder="Фамилия (необязательно)"
                         />
                         <input
-                            className={`${s.modalInputSignup} modal__input password`}
-                            type="password"
-                            name="password"
+                            className={`${s.modalInputSignup} modal__input`}
+                            type="text"
+                            name="city"
                             placeholder="Город (необязательно)"
                         />
                         <button
                             className={`${s.modalBtnSignupEnt}`}
                             type="button"
                         >
-                            <span>Зарегистрироваться</span>
+                            <span>
+                                <Link to="/profile">Зарегистрироваться</Link>
+                            </span>
                         </button>
                     </form>
                 </div>
