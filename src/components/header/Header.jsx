@@ -17,7 +17,7 @@ function Header() {
                     </Link>
                 ) : (
                     <>
-                        <Link to="/auth">
+                        <Link to="/add-new-adv">
                             <button
                                 type="button"
                                 className={`${s.headerBtnMainEnter} ${s.btnHov01}`}

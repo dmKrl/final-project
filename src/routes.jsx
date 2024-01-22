@@ -7,6 +7,7 @@ import RegistrationPage from './pages/registration-page/RegistrationPage';
 import AdvPage from './pages/adv-page/AdvPage';
 import MyAdvPage from './pages/my-adv-page/MyAdvPage';
 import SellerProfilePage from './pages/seller-profile-page/SellerProfilePage';
+import AddNewAdv from './modals/add-new-adv/AddNewAdv';
 
 function AppRoutes() {
     return (
@@ -19,6 +20,7 @@ function AppRoutes() {
                 <Route path="/my-adv-page" element={<MyAdvPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/seller-profile" element={<SellerProfilePage />} />
+                <Route path="/add-new-adv" element={<AddNewAdv />} />
             </Route>
         </Routes>
     );
