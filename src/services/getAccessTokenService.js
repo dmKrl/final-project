@@ -25,7 +25,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     const forceLogout = () => {
         console.debug('Принудительная авторизация!');
         api.dispatch(setAuth(null));
-        window.location.navigate('/auth');
+        window.location.assign('/auth');
     };
 
     const { auth } = api.getState();
@@ -96,12 +96,27 @@ export const getAccessTokenAPI = createApi({
         }),
     }),
 });
+
+export const userAPI = createApi({
+    reducerPath: 'userAPI',
+    baseQuery: baseQueryWithReauth,
+    tagTypes: ['User'],
+    endpoints: (build) => ({
+        getAuthUser: build.mutation({
+            query: () => ({
+                url: '/user',
+            }),
+            providesTags: ['User'],
+        }),
+    }),
+});
+
 export const adsAPI = createApi({
     reducerPath: 'adsAPI',
     baseQuery: baseQueryWithReauth,
     tagTypes: ['Ads'],
     endpoints: (build) => ({
-        fetchAllAds: build.query({
+        getAllAds: build.mutation({
             query: () => ({
                 url: '/ads',
             }),

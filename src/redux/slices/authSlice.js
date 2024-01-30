@@ -12,7 +12,7 @@ function getAuthFromLocalStorage() {
     }
 }
 
-console.log(JSON.parse(localStorage.getItem(AUTH_INFO)));
+// console.log(JSON.parse(localStorage.getItem(AUTH_INFO)));
 
 const initialState = {
     id: '',
@@ -24,7 +24,7 @@ const initialState = {
     refresh: '',
 };
 
-console.log(initialState);
+// console.log(initialState);
 
 const authSlice = createSlice({
     name: 'auth',

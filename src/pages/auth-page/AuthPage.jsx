@@ -1,16 +1,31 @@
 import '../../App.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import s from './AuthPage.module.css';
-import { getAccessTokenAPI } from '../../services/getAccessTokenService';
+import {
+    getAccessTokenAPI,
+    userAPI,
+} from '../../services/getAccessTokenService';
 import { setAuth } from '../../redux/slices/authSlice';
 
 function AuthPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [postAccessToken] = getAccessTokenAPI.usePostAccessTokenMutation();
+    const [getAuthUser] = userAPI.useGetAuthUserMutation();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const fetchAuthUser = () => {
+        getAuthUser().then((responseUser) => {
+            localStorage.setItem(
+                'userDataInfo',
+                JSON.stringify(responseUser?.data),
+            );
+            navigate('/profile');
+        });
+    };
 
     const responseToken = () => {
         postAccessToken({ email, password })
@@ -18,16 +33,17 @@ function AuthPage() {
                 console.log(response);
                 dispatch(
                     setAuth({
-                        access: response.access_token,
-                        refresh: response.refresh_token,
+                        access: response.data.access_token,
+                        refresh: response.data.refresh_token,
                         user: JSON.parse(localStorage.getItem('userDataInfo')),
                     }),
                 );
-                localStorage.setItem('access', response?.access_token);
-                localStorage.setItem('refresh', response?.refresh_token);
+                fetchAuthUser();
+                localStorage.setItem('access', response?.data?.access_token);
+                localStorage.setItem('refresh', response?.data?.refresh_token);
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(() => {
+                localStorage.setItem('userDataInfo', null);
             });
     };
 

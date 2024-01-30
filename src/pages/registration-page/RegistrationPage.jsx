@@ -16,16 +16,23 @@ function RegistrationPage() {
     const [city, setCity] = useState('');
     const [postAccessToken] = getAccessTokenAPI.usePostAccessTokenMutation();
     const dispatch = useDispatch();
-    const responseToken = async () => {
-        const response = await postAccessToken({ email, password });
-        const token = await response.json();
-        dispatch(
-            setAuth({
-                access: token.data.access,
-                refresh: token.data.refresh,
-                user: JSON.parse(localStorage.getItem('userDataInfo')),
-            }),
-        );
+    const responseToken = () => {
+        postAccessToken({ email, password })
+            .then((response) => {
+                console.log(response);
+                dispatch(
+                    setAuth({
+                        access: response.data.access_token,
+                        refresh: response.data.refresh_token,
+                        user: JSON.parse(localStorage.getItem('userDataInfo')),
+                    }),
+                );
+                localStorage.setItem('access', response?.data?.access_token);
+                localStorage.setItem('refresh', response?.data?.refresh_token);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
     const fetchForRegistration = async () => {
         try {
