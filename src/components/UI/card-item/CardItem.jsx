@@ -2,12 +2,13 @@ import { Link } from 'react-router-dom';
 import s from './CardItem.module.css';
 
 function CardItem(props) {
+    const dateTime = props?.date?.split('T')[0];
     return (
         <div className={s.cardsItem}>
             <div className={s.cardsCard}>
                 <div className={s.cardImage}>
                     <Link to="/" className="">
-                        <img src="#" alt="" />
+                        <img src={props?.image?.url} alt="" />
                     </Link>
                 </div>
                 <div className={s.cardContent}>
@@ -16,7 +17,7 @@ function CardItem(props) {
                     </Link>
                     <p className={s.cardPrice}>{props.price}</p>
                     <p className={s.cardPlace}>{props.place}</p>
-                    <p className={s.cardDate}>{props.date}</p>
+                    <p className={s.cardDate}>{dateTime}</p>
                 </div>
             </div>
         </div>

@@ -5,9 +5,11 @@ import {
     userAPI,
     getAccessTokenAPI,
 } from '../services/getAccessTokenService';
+import { adsReducer } from './slices/adsSlice';
 
 const store = configureStore({
     reducer: {
+        ads: adsReducer,
         auth: authReducer,
         [getAccessTokenAPI.reducerPath]: getAccessTokenAPI.reducer,
         [adsAPI.reducerPath]: adsAPI.reducer,

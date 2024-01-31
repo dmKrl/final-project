@@ -3,7 +3,7 @@
     margin: 0 auto;
 }
 .cards {
-    max-width: 1158px;
+    max-width: 1200px;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 270px);

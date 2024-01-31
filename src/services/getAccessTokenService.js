@@ -116,7 +116,7 @@ export const adsAPI = createApi({
     baseQuery: baseQueryWithReauth,
     tagTypes: ['Ads'],
     endpoints: (build) => ({
-        getAllAds: build.mutation({
+        getAllAds: build.query({
             query: () => ({
                 url: '/ads',
             }),
