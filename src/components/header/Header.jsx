@@ -32,6 +32,17 @@ function Header() {
                                 Личный кабинет
                             </button>
                         </Link>
+                        <Link to="/auth">
+                            <button
+                                type="button"
+                                className={`${s.headerBtnMainEnter} ${s.btnHov01}`}
+                                onClick={() =>
+                                    localStorage.setItem('userDataInfo', null)
+                                }
+                            >
+                                Выйти
+                            </button>
+                        </Link>
                     </>
                 )}
             </nav>

@@ -17,14 +17,12 @@ function AppRoutes() {
             <Route path="/registration" element={<RegistrationPage />} />
             <Route path="/" element={<MainPage />}>
                 <Route path="/" element={<AdsPage />} />
+                <Route path="/seller-profile" element={<SellerProfilePage />} />
+                <Route path="/adv-page" element={<AdvPage />} />
                 <Route element={<ProtectedRoute />}>
-                    <Route path="/adv-page" element={<AdvPage />} />
                     <Route path="/my-adv-page" element={<MyAdvPage />} />
                     <Route path="/profile" element={<ProfilePage />} />
-                    <Route
-                        path="/seller-profile"
-                        element={<SellerProfilePage />}
-                    />
+
                     <Route path="/add-new-adv" element={<AddNewAdv />} />
                 </Route>
             </Route>
