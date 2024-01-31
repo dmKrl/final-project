@@ -6,11 +6,13 @@ import {
     getAccessTokenAPI,
 } from '../services/getAccessTokenService';
 import { adsReducer } from './slices/adsSlice';
+import { filterReducer } from './slices/filterSlice';
 
 const store = configureStore({
     reducer: {
         ads: adsReducer,
         auth: authReducer,
+        filter: filterReducer,
         [getAccessTokenAPI.reducerPath]: getAccessTokenAPI.reducer,
         [adsAPI.reducerPath]: adsAPI.reducer,
         [userAPI.reducerPath]: userAPI.reducer,
