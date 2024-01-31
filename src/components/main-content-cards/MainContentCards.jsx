@@ -9,15 +9,7 @@ function MainContentCards() {
         <div className={s.mainContent}>
             <div className={s.cards}>
                 {allAds?.map((ad) => {
-                    return (
-                        <CardItem
-                            price={ad.price}
-                            place={ad.description}
-                            text={ad.title}
-                            date={ad.created_on}
-                            image={ad.images[0]}
-                        />
-                    );
+                    return <CardItem ad={ad} />;
                 })}
             </div>
         </div>

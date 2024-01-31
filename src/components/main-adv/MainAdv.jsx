@@ -4,7 +4,8 @@ import s from './MainAdv.module.css';
 import ButtonShowNum from '../button-show-num/ButtonShowNum';
 import ButtonChangeAdv from '../button-change-adv/ButtonChangeAdv';
 
-function MainAdv() {
+function MainAdv(props) {
+    const { date, price, title, description } = props;
     const loaction = useLocation();
     return (
         <div>
@@ -43,17 +44,15 @@ function MainAdv() {
                 </div>
                 <div className={s.articleRight}>
                     <div className={s.articleBlock}>
-                        <HeadingH3>
-                            Ракетка для большого тенниса Triumph Pro STС Б/У
-                        </HeadingH3>
+                        <HeadingH3>{title}</HeadingH3>
                         <div className={s.articleInfo}>
-                            <p className={s.articleDate}>Сегодня в 10:45</p>
-                            <p className={s.articleCity}>Санкт-Петербург</p>
+                            <p className={s.articleCity}>{description}</p>
+                            <p className={s.articleDate}>{date}</p>
                             <Link className={s.articleLink} to="/adv-page">
                                 23 отзыва
                             </Link>
                         </div>
-                        <p className={s.articlePrice}>2 200 ₽</p>
+                        <p className={s.articlePrice}>{price}</p>
                         {loaction.pathname === '/adv-page' ? (
                             <ButtonShowNum />
                         ) : (

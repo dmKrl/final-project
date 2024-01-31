@@ -33,6 +33,8 @@ a:visited {
 button,
 ._btn {
     cursor: pointer;
+    border: none;
+    background: none;
 }
 
 ul li {
