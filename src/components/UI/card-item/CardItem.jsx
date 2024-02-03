@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import s from './CardItem.module.css';
 import { setChosenAdv } from '../../../redux/slices/adsSlice';
+import changeDate from '../../../app/changeDate';
 
 function CardItem({ ad }) {
     const { title, price, description, created_on: createdOn, images } = ad;
-    const dateTime = createdOn?.split('T')[0];
     const dispatch = useDispatch();
     function addToStoreSelectedAdv() {
         return dispatch(setChosenAdv(ad));
@@ -27,7 +27,7 @@ function CardItem({ ad }) {
                     </button>
                     <p className={s.cardPrice}>{price} руб.</p>
                     <p className={s.cardPlace}>{description}</p>
-                    <p className={s.cardDate}>{dateTime}</p>
+                    <p className={s.cardDate}>{changeDate(createdOn)}</p>
                 </div>
             </div>
         </div>

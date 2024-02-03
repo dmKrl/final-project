@@ -1,12 +1,18 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import HeadingH3 from '../heading-h3/HeadingH3';
 import s from './MainAdv.module.css';
 import ButtonShowNum from '../button-show-num/ButtonShowNum';
 import ButtonChangeAdv from '../button-change-adv/ButtonChangeAdv';
+import changeDate from '../../app/changeDate';
+import { setSellerInfo } from '../../redux/slices/sellerSlice';
 
-function MainAdv(props) {
-    const { date, price, title, description } = props;
+function MainAdv({ chosenAdv }) {
     const loaction = useLocation();
+    const dispatch = useDispatch();
+    function addToStoreSellerInfo() {
+        dispatch(setSellerInfo(chosenAdv?.user));
+    }
     return (
         <div>
             <div className={s.mainArtic}>
@@ -44,15 +50,21 @@ function MainAdv(props) {
                 </div>
                 <div className={s.articleRight}>
                     <div className={s.articleBlock}>
-                        <HeadingH3>{title}</HeadingH3>
+                        <HeadingH3>{chosenAdv?.title}</HeadingH3>
                         <div className={s.articleInfo}>
-                            <p className={s.articleCity}>{description}</p>
-                            <p className={s.articleDate}>{date}</p>
+                            <p className={s.articleDate}>
+                                {changeDate(chosenAdv?.created_on)}
+                            </p>
+                            <p className={s.articleCity}>
+                                {chosenAdv?.user?.city}
+                            </p>
                             <Link className={s.articleLink} to="/adv-page">
                                 23 отзыва
                             </Link>
                         </div>
-                        <p className={s.articlePrice}>{price}</p>
+                        <p className={s.articlePrice}>
+                            {chosenAdv?.price} рублей.
+                        </p>
                         {loaction.pathname === '/adv-page' ? (
                             <ButtonShowNum />
                         ) : (
@@ -64,12 +76,17 @@ function MainAdv(props) {
                                 <img src="" alt="" />
                             </div>
                             <div className={s.authorCont}>
-                                <Link
-                                    to="/seller-profile"
-                                    className={s.authorName}
+                                <button
+                                    type="button"
+                                    onClick={addToStoreSellerInfo}
                                 >
-                                    Кирилл
-                                </Link>
+                                    <Link
+                                        to="/seller-profile"
+                                        className={s.authorName}
+                                    >
+                                        {chosenAdv?.user?.name}
+                                    </Link>
+                                </button>
                                 <p className={s.authorAbout}>
                                     Продаёт товары с августа 2021
                                 </p>
@@ -81,17 +98,7 @@ function MainAdv(props) {
             <div className={s.mainContainer}>
                 <HeadingH3>Описание товара</HeadingH3>
                 <div className={s.mainContent}>
-                    <p className={s.mainText}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit
-                        anim id est laborum.
-                    </p>
+                    <p className={s.mainText}>{chosenAdv?.description}</p>
                 </div>
             </div>
         </div>

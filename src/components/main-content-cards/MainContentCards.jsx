@@ -15,11 +15,13 @@ function MainContentCards() {
         return matchesNameTrack;
     });
     return (
-        <div className={s.mainContent}>
-            <div className={s.cards}>
-                {filteredAds?.map((ad) => {
-                    return <CardItem ad={ad} />;
-                })}
+        <div className={s.mainWrapper}>
+            <div className={s.mainContent}>
+                <div className={s.cards}>
+                    {filteredAds?.map((ad) => {
+                        return <CardItem ad={ad} key={ad.id} />;
+                    })}
+                </div>
             </div>
         </div>
     );
