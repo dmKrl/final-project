@@ -14,6 +14,7 @@ function RegistrationPage() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [city, setCity] = useState('');
+    const [phone, setPhone] = useState('');
     const [postAccessToken] = getAccessTokenAPI.usePostAccessTokenMutation();
     const dispatch = useDispatch();
     const responseToken = () => {
@@ -43,6 +44,7 @@ function RegistrationPage() {
                 city,
                 firstName,
                 lastName,
+                phone,
             });
             responseToken();
             console.log(response);
@@ -123,6 +125,14 @@ function RegistrationPage() {
                             value={city}
                             onChange={(event) => setCity(event.target.value)}
                             placeholder="Город (необязательно)"
+                        />
+                        <input
+                            className={`${s.modalInputSignup} modal__input`}
+                            type="number"
+                            name="city"
+                            value={phone}
+                            onChange={(event) => setPhone(event.target.value)}
+                            placeholder="Номер телефона"
                         />
                         <button
                             className={`${s.modalBtnSignupEnt}`}

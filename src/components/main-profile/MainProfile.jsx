@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import HeadingH3 from '../heading-h3/HeadingH3';
 import s from './MainProfile.module.css';
 
-function MainProfile() {
+function MainProfile({ userData }) {
+    const { surname, name, city, phone } = userData;
     return (
         <div className={s.mainProfile}>
             <div className={s.profileContent}>
@@ -26,15 +27,15 @@ function MainProfile() {
                                 <input
                                     className={s.settingsFName}
                                     type="text"
-                                    value="Дмитрий"
+                                    value={name}
                                 />
                             </div>
                             <div className={s.settingsDiv}>
                                 <label htmlFor="lname">Фамилия</label>
                                 <input
                                     className={s.settingsLName}
-                                    value="Краличкин"
                                     type="text"
+                                    value={surname}
                                 />
                             </div>
                             <div className={s.settingsDiv}>
@@ -42,17 +43,17 @@ function MainProfile() {
                                 <input
                                     className={s.settingsCity}
                                     type="text"
-                                    value="Камчатский край"
+                                    value={city}
                                 />
                             </div>
                             <div className={s.settingsDiv}>
                                 <label htmlFor="phone">Телефон</label>
                                 <input
                                     className={s.settingsPhone}
-                                    type="tel"
+                                    type="phone"
                                     name="phone"
                                     id="phone"
-                                    value="89161234567"
+                                    value={phone}
                                 />
                             </div>
 
