@@ -6,12 +6,12 @@ import { selectFilterAds } from '../../redux/slices/filterSlice';
 
 function MainContentCards() {
     const { data: allAds } = adsAPI.useGetAllAdsQuery();
-    const filterAd = useSelector(selectFilterAds);
-    console.log(allAds);
+    const filterAds = useSelector(selectFilterAds);
+    console.log(filterAds);
     const filteredAds = allAds?.filter((ads) => {
         const matchesNameTrack = ads.title
             .toLowerCase()
-            .includes(filterAd.toLowerCase());
+            .includes(filterAds.toLowerCase());
         return matchesNameTrack;
     });
     return (

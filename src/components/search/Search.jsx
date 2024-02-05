@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 import Logo from '../UI/logo/Logo';
 import s from './Search.module.css';
 import {
@@ -9,9 +10,10 @@ import {
 function Search() {
     const dispatch = useDispatch();
     const filterAds = useSelector(selectFilterAds);
+    const [filterValue, setFilterValue] = useState();
     console.log(filterAds);
-    function handleFilterAds(event) {
-        dispatch(setFilteredAds(event.target.value));
+    function handleFilterAds() {
+        dispatch(setFilteredAds(filterValue));
     }
     return (
         <div className={s.mainSearch}>
@@ -23,11 +25,12 @@ function Search() {
                     placeholder="Поиск по объявлениям"
                     name="text"
                     defaultValue={filterAds}
-                    onChange={handleFilterAds}
+                    onChange={(e) => setFilterValue(e.target.value)}
                 />
                 <button
                     className={`${s.searchBtn} ${s.btnHov02}`}
                     type="button"
+                    onClick={handleFilterAds}
                 >
                     Найти
                 </button>
