@@ -128,9 +128,9 @@ export const adsAPI = createApi({
             }),
             providesTags: ['Ads'],
         }),
-        getAllReviews: build.query({
-            query: () => ({
-                url: `/comments`,
+        getReviewsForAdv: build.query({
+            query: (pk) => ({
+                url: `/ads/${pk}/comments`,
             }),
             providesTags: ['Ads'],
         }),

@@ -10,8 +10,8 @@ import changeDate from '../../app/changeDate';
 
 function ProductReviews() {
     const choseAdvId = useSelector(selectChosenAdv);
-    const { data: getAllReviews } = adsAPI.useGetAllReviewsQuery();
-    console.log(getAllReviews);
+    const { data: getReviewsForAdv } =
+        adsAPI.useGetReviewsForAdvQuery(choseAdvId);
     return (
         <div className={s.wrapper}>
             <div className={s.containerBg}>
@@ -47,7 +47,7 @@ function ProductReviews() {
                                 </button>
                             </form>
                             <div className={s.modalReviews}>
-                                {getAllReviews?.map((comment) => {
+                                {getReviewsForAdv?.map((comment) => {
                                     return (
                                         <Reviewer
                                             reviewName={comment.author.name}
