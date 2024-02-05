@@ -107,19 +107,22 @@
     align-items: flex-start;
     width: 100%;
     overflow-y: auto;
-    scrollbar-color: #ffffff #2e2e2e;
+    scrollbar-color: #afafaf #ffffff;
     scrollbar-width: thin;
-    scrollbar-width: 0px;
+    right: 0;
 }
 
 .modalScroll::-webkit-scrollbar {
     width: 0px;
     background-color: #ffffff;
 }
+.modalScroll::-webkit-scrollbar-button {
+    display: none;
+}
 
 .modalScroll::-webkit-scrollbar-thumb {
     background-color: #d9d9d9;
-    border-radius: 0px;
+    border-radius: 10px;
 }
 
 .modalFormNewArt {
