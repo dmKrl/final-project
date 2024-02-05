@@ -88,7 +88,8 @@ function MainAdv({ getChoseAdv }) {
                                     </Link>
                                 </button>
                                 <p className={s.authorAbout}>
-                                    Продаёт товары с августа 2021
+                                    Продаёт товары с{' '}
+                                    {changeDate(getChoseAdv?.user?.sells_from)}
                                 </p>
                             </div>
                         </div>

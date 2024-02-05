@@ -128,5 +128,11 @@ export const adsAPI = createApi({
             }),
             providesTags: ['Ads'],
         }),
+        getAllReviews: build.query({
+            query: () => ({
+                url: `/comments`,
+            }),
+            providesTags: ['Ads'],
+        }),
     }),
 });

@@ -5,9 +5,13 @@ import HeadingH3 from '../../components/heading-h3/HeadingH3';
 import Reviewer from '../../components/reviewer/Reviewer';
 import s from './ProductReviews.module.css';
 import { selectChosenAdv } from '../../redux/slices/adsSlice';
+import { adsAPI } from '../../services/getAccessTokenService';
+import changeDate from '../../app/changeDate';
 
 function ProductReviews() {
     const choseAdvId = useSelector(selectChosenAdv);
+    const { data: getAllReviews } = adsAPI.useGetAllReviewsQuery();
+    console.log(getAllReviews);
     return (
         <div className={s.wrapper}>
             <div className={s.containerBg}>
@@ -43,36 +47,18 @@ function ProductReviews() {
                                 </button>
                             </form>
                             <div className={s.modalReviews}>
-                                <Reviewer
-                                    reviewName="Олег"
-                                    reviewText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-                                    reviewDate="14 августа"
-                                    reviewTitle="Комментарий"
-                                />
-                                <Reviewer
-                                    reviewName="Олег"
-                                    reviewText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-                                    reviewDate="14 августа"
-                                    reviewTitle="Комментарий"
-                                />
-                                <Reviewer
-                                    reviewName="Олег"
-                                    reviewText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-                                    reviewDate="14 августа"
-                                    reviewTitle="Комментарий"
-                                />
-                                <Reviewer
-                                    reviewName="Олег"
-                                    reviewText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-                                    reviewDate="14 августа"
-                                    reviewTitle="Комментарий"
-                                />
-                                <Reviewer
-                                    reviewName="Олег"
-                                    reviewText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-                                    reviewDate="14 августа"
-                                    reviewTitle="Комментарий"
-                                />
+                                {getAllReviews?.map((comment) => {
+                                    return (
+                                        <Reviewer
+                                            reviewName={comment.author.name}
+                                            reviewText={comment.text}
+                                            reviewDate={changeDate(
+                                                comment.created_on,
+                                            )}
+                                            reviewTitle="Комментарий"
+                                        />
+                                    );
+                                })}
                             </div>
                         </div>
                     </div>

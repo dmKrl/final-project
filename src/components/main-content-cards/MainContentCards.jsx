@@ -6,6 +6,7 @@ import { selectFilterAds } from '../../redux/slices/filterSlice';
 
 function MainContentCards() {
     const { data: allAds } = adsAPI.useGetAllAdsQuery();
+    console.log(allAds);
     const filterAds = useSelector(selectFilterAds);
     const filteredAds = allAds?.filter((ads) => {
         const matchesNameTrack = ads.title

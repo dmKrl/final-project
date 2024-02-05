@@ -14,7 +14,7 @@ function Reviewer(props) {
                         {props.reviewName} <span>{props.reviewDate}</span>
                     </p>
                     <h5 className={`${s.reviewTitle} ${s.fontT}`}>
-                        {props.reviewTitle}
+                        Коментарий
                     </h5>
                     <p className={`${s.reviewText} ${s.fontT}`}>
                         {props.reviewText}
