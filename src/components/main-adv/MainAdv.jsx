@@ -58,7 +58,7 @@ function MainAdv({ getChoseAdv }) {
                             <p className={s.articleCity}>
                                 {getChoseAdv?.user?.city}
                             </p>
-                            <Link className={s.articleLink} to="/adv-page">
+                            <Link className={s.articleLink} to="/reviews">
                                 23 отзыва
                             </Link>
                         </div>

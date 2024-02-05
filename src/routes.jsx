@@ -9,6 +9,7 @@ import MyAdvPage from './pages/my-adv-page/MyAdvPage';
 import SellerProfilePage from './pages/seller-profile-page/SellerProfilePage';
 import AddNewAdv from './modals/add-new-adv/AddNewAdv';
 import ProtectedRoute from './components/protected-route/ProtectedRoute';
+import ProductReviews from './modals/product-reviews/ProductReviews';
 
 function AppRoutes() {
     return (
@@ -18,11 +19,11 @@ function AppRoutes() {
             <Route path="/" element={<MainPage />}>
                 <Route path="/" element={<AdsPage />} />
                 <Route path="/seller-profile" element={<SellerProfilePage />} />
-                <Route path="/adv-page" element={<AdvPage />} />
+                <Route path="/adv-page/:id" element={<AdvPage />} />
                 <Route element={<ProtectedRoute />}>
                     <Route path="/my-adv-page" element={<MyAdvPage />} />
                     <Route path="/profile" element={<ProfilePage />} />
-
+                    <Route path="/reviews" element={<ProductReviews />} />
                     <Route path="/add-new-adv" element={<AddNewAdv />} />
                 </Route>
             </Route>

@@ -21,7 +21,7 @@ function CardItem({ ad }) {
                 </div>
                 <div className={s.cardContent}>
                     <button type="button" onClick={addToStoreSelectedAdv}>
-                        <Link to="/adv-page" className="">
+                        <Link to={`/adv-page/${ad.id}`} className="">
                             <h3 className={s.cardTitle}>{title}</h3>
                         </Link>
                     </button>

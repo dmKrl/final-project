@@ -1,9 +1,13 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import HeadingH3 from '../../components/heading-h3/HeadingH3';
 import Reviewer from '../../components/reviewer/Reviewer';
 import s from './ProductReviews.module.css';
+import { selectChosenAdv } from '../../redux/slices/adsSlice';
 
 function ProductReviews() {
+    const choseAdvId = useSelector(selectChosenAdv);
     return (
         <div className={s.wrapper}>
             <div className={s.containerBg}>
@@ -11,7 +15,9 @@ function ProductReviews() {
                     <div className={s.modalContent}>
                         <HeadingH3>Отзывы о товаре</HeadingH3>
                         <div className={s.modalBtnClose}>
-                            <div className={s.modalBtnCloseLine} />
+                            <Link to={`/adv-page/${choseAdvId}`}>
+                                <div className={s.modalBtnCloseLine} />
+                            </Link>
                         </div>
                         <div className={s.modalScroll}>
                             <form
