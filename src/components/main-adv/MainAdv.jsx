@@ -7,11 +7,11 @@ import ButtonChangeAdv from '../button-change-adv/ButtonChangeAdv';
 import changeDate from '../../app/changeDate';
 import { setSellerInfo } from '../../redux/slices/sellerSlice';
 
-function MainAdv({ chosenAdv }) {
+function MainAdv({ getChoseAdv }) {
     const loaction = useLocation();
     const dispatch = useDispatch();
     function addToStoreSellerInfo() {
-        dispatch(setSellerInfo(chosenAdv?.user));
+        dispatch(setSellerInfo(getChoseAdv?.user));
     }
     return (
         <div>
@@ -50,20 +50,20 @@ function MainAdv({ chosenAdv }) {
                 </div>
                 <div className={s.articleRight}>
                     <div className={s.articleBlock}>
-                        <HeadingH3>{chosenAdv?.title}</HeadingH3>
+                        <HeadingH3>{getChoseAdv?.title}</HeadingH3>
                         <div className={s.articleInfo}>
                             <p className={s.articleDate}>
-                                {changeDate(chosenAdv?.created_on)}
+                                {changeDate(getChoseAdv?.created_on)}
                             </p>
                             <p className={s.articleCity}>
-                                {chosenAdv?.user?.city}
+                                {getChoseAdv?.user?.city}
                             </p>
                             <Link className={s.articleLink} to="/adv-page">
                                 23 отзыва
                             </Link>
                         </div>
                         <p className={s.articlePrice}>
-                            {chosenAdv?.price} рублей.
+                            {getChoseAdv?.price} рублей.
                         </p>
                         {loaction.pathname === '/adv-page' ? (
                             <ButtonShowNum />
@@ -84,7 +84,7 @@ function MainAdv({ chosenAdv }) {
                                         to="/seller-profile"
                                         className={s.authorName}
                                     >
-                                        {chosenAdv?.user?.name}
+                                        {getChoseAdv?.user?.name}
                                     </Link>
                                 </button>
                                 <p className={s.authorAbout}>
@@ -98,7 +98,7 @@ function MainAdv({ chosenAdv }) {
             <div className={s.mainContainer}>
                 <HeadingH3>Описание товара</HeadingH3>
                 <div className={s.mainContent}>
-                    <p className={s.mainText}>{chosenAdv?.description}</p>
+                    <p className={s.mainText}>{getChoseAdv?.description}</p>
                 </div>
             </div>
         </div>

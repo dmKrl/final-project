@@ -8,7 +8,7 @@ function CardItem({ ad }) {
     const { title, price, description, created_on: createdOn, images } = ad;
     const dispatch = useDispatch();
     function addToStoreSelectedAdv() {
-        return dispatch(setChosenAdv(ad));
+        return dispatch(setChosenAdv(ad.id));
     }
 
     return (

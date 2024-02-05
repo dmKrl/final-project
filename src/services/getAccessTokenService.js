@@ -122,5 +122,11 @@ export const adsAPI = createApi({
             }),
             providesTags: ['Ads'],
         }),
+        getChoseAdv: build.query({
+            query: (pk) => ({
+                url: `/ads/${pk}`,
+            }),
+            providesTags: ['Ads'],
+        }),
     }),
 });

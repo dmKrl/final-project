@@ -1,17 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import Logo from '../UI/logo/Logo';
 import s from './Search.module.css';
-import {
-    selectFilterAds,
-    setFilteredAds,
-} from '../../redux/slices/filterSlice';
+import { setFilteredAds } from '../../redux/slices/filterSlice';
 
 function Search() {
     const dispatch = useDispatch();
-    const filterAds = useSelector(selectFilterAds);
     const [filterValue, setFilterValue] = useState();
-    console.log(filterAds);
     function handleFilterAds() {
         dispatch(setFilteredAds(filterValue));
     }
@@ -21,10 +16,10 @@ function Search() {
             <div className={s.searchForm}>
                 <input
                     className={s.searchText}
-                    type="text"
+                    type="search"
                     placeholder="Поиск по объявлениям"
                     name="text"
-                    defaultValue={filterAds}
+                    defaultValue={filterValue}
                     onChange={(e) => setFilterValue(e.target.value)}
                 />
                 <button
