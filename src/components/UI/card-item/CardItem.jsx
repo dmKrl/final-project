@@ -1,14 +1,11 @@
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import s from './CardItem.module.css';
-import { setChosenAdv } from '../../../redux/slices/adsSlice';
 import changeDate from '../../../app/changeDate';
 
 function CardItem({ ad }) {
     const { title, price, description, created_on: createdOn, images } = ad;
-    const dispatch = useDispatch();
     function addToStoreSelectedAdv() {
-        return dispatch(setChosenAdv(ad.id));
+        localStorage.setItem('advID', ad.id);
     }
 
     return (

@@ -1,18 +1,12 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import HeadingH3 from '../heading-h3/HeadingH3';
 import s from './MainAdv.module.css';
 import ButtonShowNum from '../button-show-num/ButtonShowNum';
 import ButtonChangeAdv from '../button-change-adv/ButtonChangeAdv';
 import changeDate from '../../app/changeDate';
-import { setSellerInfo } from '../../redux/slices/sellerSlice';
 
 function MainAdv({ getChoseAdv }) {
     const loaction = useLocation();
-    const dispatch = useDispatch();
-    function addToStoreSellerInfo() {
-        dispatch(setSellerInfo(getChoseAdv?.user));
-    }
     return (
         <div>
             <div className={s.mainArtic}>
@@ -76,10 +70,7 @@ function MainAdv({ getChoseAdv }) {
                                 <img src="" alt="" />
                             </div>
                             <div className={s.authorCont}>
-                                <button
-                                    type="button"
-                                    onClick={addToStoreSellerInfo}
-                                >
+                                <button type="button">
                                     <Link
                                         to="/seller-profile"
                                         className={s.authorName}

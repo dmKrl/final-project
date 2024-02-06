@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import s from './MainSellerProfile.module.css';
 import HeadingH3 from '../heading-h3/HeadingH3';
 import ButtonShowNum from '../button-show-num/ButtonShowNum';
-import { selectSellerInfo } from '../../redux/slices/sellerSlice';
+import { adsAPI } from '../../services/getAccessTokenService';
+import changeDate from '../../app/changeDate';
 
 function MainSellerProfile() {
-    const sellerData = useSelector(selectSellerInfo);
-    console.log(sellerData);
+    const choseAdvID = localStorage.getItem('advID');
+    const { data: getChoseAdv } = adsAPI.useGetChoseAdvQuery(
+        Number(choseAdvID),
+    );
     return (
         <div className={s.mainProfileSell}>
             <div className={s.profileSellContent}>
@@ -21,12 +23,15 @@ function MainSellerProfile() {
                     </div>
                     <div className={s.sellerRight}>
                         <HeadingH3>
-                            {sellerData.name}
-                            {sellerData.surname}
+                            {getChoseAdv?.user?.name}
+                            {getChoseAdv?.user?.surname}
                         </HeadingH3>
-                        <p className={s.sellerCity}>{sellerData.city}</p>
+                        <p className={s.sellerCity}>
+                            {getChoseAdv?.user?.city}
+                        </p>
                         <p className={s.sellerInf}>
-                            Продаёт товары с {sellerData.sells_from}
+                            Продаёт товары с{' '}
+                            {changeDate(getChoseAdv?.user?.sells_from)}
                         </p>
                         <ButtonShowNum />
                     </div>
