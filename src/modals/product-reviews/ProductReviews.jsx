@@ -4,13 +4,13 @@ import HeadingH3 from '../../components/heading-h3/HeadingH3';
 import Reviewer from '../../components/reviewer/Reviewer';
 import s from './ProductReviews.module.css';
 import changeDate from '../../app/changeDate';
-import { adsUnRegisteredAPI } from '../../services/unRegisteredUserService';
+import { commentsUnRegisteredAPI } from '../../services/unRegisteredUserService';
 
 function ProductReviews() {
     const choseAdvID = localStorage.getItem('advID');
 
     const { data: getReviewsForAdv } =
-        adsUnRegisteredAPI.useGetReviewsForAdvQuery(choseAdvID);
+        commentsUnRegisteredAPI.useGetReviewsForAdvQuery(choseAdvID);
     return (
         <div className={s.wrapper}>
             <div className={s.containerBg}>
