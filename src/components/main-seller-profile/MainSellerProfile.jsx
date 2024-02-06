@@ -2,12 +2,12 @@ import { Link } from 'react-router-dom';
 import s from './MainSellerProfile.module.css';
 import HeadingH3 from '../heading-h3/HeadingH3';
 import ButtonShowNum from '../button-show-num/ButtonShowNum';
-import { adsAPI } from '../../services/getAccessTokenService';
 import changeDate from '../../app/changeDate';
+import { adsUnRegisteredAPI } from '../../services/unRegisteredUserService';
 
 function MainSellerProfile() {
     const choseAdvID = localStorage.getItem('advID');
-    const { data: getChoseAdv } = adsAPI.useGetChoseAdvQuery(
+    const { data: getChoseAdv } = adsUnRegisteredAPI.useGetChoseAdvQuery(
         Number(choseAdvID),
     );
     return (

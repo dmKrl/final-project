@@ -20,10 +20,10 @@ function AppRoutes() {
                 <Route path="/" element={<AdsPage />} />
                 <Route path="/seller-profile" element={<SellerProfilePage />} />
                 <Route path="/adv-page/:id" element={<AdvPage />} />
+                <Route path="/reviews" element={<ProductReviews />} />
                 <Route element={<ProtectedRoute />}>
                     <Route path="/my-adv-page" element={<MyAdvPage />} />
                     <Route path="/profile" element={<ProfilePage />} />
-                    <Route path="/reviews" element={<ProductReviews />} />
                     <Route path="/add-new-adv" element={<AddNewAdv />} />
                 </Route>
             </Route>

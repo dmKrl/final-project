@@ -1,17 +1,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import HeadingH3 from '../../components/heading-h3/HeadingH3';
 import Reviewer from '../../components/reviewer/Reviewer';
 import s from './ProductReviews.module.css';
-import { selectChosenAdv } from '../../redux/slices/adsSlice';
-import { adsAPI } from '../../services/getAccessTokenService';
 import changeDate from '../../app/changeDate';
+import { adsUnRegisteredAPI } from '../../services/unRegisteredUserService';
 
 function ProductReviews() {
-    const choseAdvId = useSelector(selectChosenAdv);
+    const choseAdvID = localStorage.getItem('advID');
+
     const { data: getReviewsForAdv } =
-        adsAPI.useGetReviewsForAdvQuery(choseAdvId);
+        adsUnRegisteredAPI.useGetReviewsForAdvQuery(choseAdvID);
     return (
         <div className={s.wrapper}>
             <div className={s.containerBg}>
@@ -19,7 +18,7 @@ function ProductReviews() {
                     <div className={s.modalContent}>
                         <HeadingH3>Отзывы о товаре</HeadingH3>
                         <div className={s.modalBtnClose}>
-                            <Link to={`/adv-page/${choseAdvId}`}>
+                            <Link to={`/adv-page/${choseAdvID}`}>
                                 <div className={s.modalBtnCloseLine} />
                             </Link>
                         </div>

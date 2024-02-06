@@ -39,7 +39,8 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
             url: '/auth/login',
             method: 'PUT',
             body: {
-                refresh: auth.refresh,
+                access_token: auth.refresh,
+                refresh_token: auth.refresh,
             },
         },
         api,
@@ -48,7 +49,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
     console.debug('Результат запроса на обновление токена', { refreshResult });
 
-    if (!refreshResult.data.access) {
+    if (!refreshResult.data.access_token) {
         return forceLogout();
     }
 
@@ -131,6 +132,12 @@ export const adsAPI = createApi({
         getReviewsForAdv: build.query({
             query: (pk) => ({
                 url: `/ads/${pk}/comments`,
+            }),
+            providesTags: ['Ads'],
+        }),
+        getAdsAuthUser: build.query({
+            query: () => ({
+                url: `/ads/me`,
             }),
             providesTags: ['Ads'],
         }),

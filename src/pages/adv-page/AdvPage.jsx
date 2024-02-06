@@ -1,11 +1,11 @@
 import MainAdv from '../../components/main-adv/MainAdv';
 import MenuToBack from '../../components/menu-to-back/MenuToBack';
 import s from './AdvPage.module.css';
-import { adsAPI } from '../../services/getAccessTokenService';
+import { adsUnRegisteredAPI } from '../../services/unRegisteredUserService';
 
 function AdvPage() {
     const choseAdvID = localStorage.getItem('advID');
-    const { data: getChoseAdv } = adsAPI.useGetChoseAdvQuery(
+    const { data: getChoseAdv } = adsUnRegisteredAPI.useGetChoseAdvQuery(
         Number(choseAdvID),
     );
 
