@@ -12,7 +12,7 @@
 }
 .modalFormRegister {
     width: 366px;
-    height: 647px;
+    max-height: 700px;
     background-color: #ffffff;
     border-radius: 12px;
     display: -webkit-box;
@@ -46,6 +46,9 @@
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
+}
+.modalBtnSignupEnt a {
+    color: #f4f5f6;
 }
 .modalBtnSignupEnt span {
     width: 100%;

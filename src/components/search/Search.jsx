@@ -1,28 +1,35 @@
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import Logo from '../UI/logo/Logo';
 import s from './Search.module.css';
+import { setFilteredAds } from '../../redux/slices/filterSlice';
 
 function Search() {
-    function onSubmit(event) {
-        event.preventDefault();
+    const dispatch = useDispatch();
+    const [filterValue, setFilterValue] = useState();
+    function handleFilterAds() {
+        dispatch(setFilteredAds(filterValue));
     }
     return (
         <div className={s.mainSearch}>
             <Logo />
-            <form action="#" className={s.searchForm}>
+            <div className={s.searchForm}>
                 <input
                     className={s.searchText}
-                    type="text"
+                    type="search"
                     placeholder="Поиск по объявлениям"
-                    name="search"
+                    name="text"
+                    defaultValue={filterValue}
+                    onChange={(e) => setFilterValue(e.target.value)}
                 />
                 <button
                     className={`${s.searchBtn} ${s.btnHov02}`}
                     type="button"
-                    onSubmit={onSubmit}
+                    onClick={handleFilterAds}
                 >
                     Найти
                 </button>
-            </form>
+            </div>
         </div>
     );
 }

@@ -1,12 +1,11 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import s from './Header.module.css';
 
 function Header() {
-    const location = useLocation();
     return (
         <header className={s.header}>
             <nav className={s.headerNav}>
-                {location.pathname === '/' ? (
+                {!JSON.parse(localStorage.getItem('userDataInfo')) ? (
                     <Link to="/auth">
                         <button
                             type="button"
@@ -31,6 +30,17 @@ function Header() {
                                 className={`${s.headerBtnMainEnter} ${s.btnHov01}`}
                             >
                                 Личный кабинет
+                            </button>
+                        </Link>
+                        <Link to="/auth">
+                            <button
+                                type="button"
+                                className={`${s.headerBtnMainEnter} ${s.btnHov01}`}
+                                onClick={() =>
+                                    localStorage.setItem('userDataInfo', null)
+                                }
+                            >
+                                Выйти
                             </button>
                         </Link>
                     </>

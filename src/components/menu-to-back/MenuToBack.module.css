@@ -1,3 +1,8 @@
+.menuForm {
+    margin-left: 60px;
+    max-width: 1044px;
+    width: 100%;
+}
 .mainMenu {
     width: 100%;
     display: -webkit-box;
@@ -8,15 +13,10 @@
     align-items: center;
     -webkit-box-pack: start;
     -ms-flex-pack: start;
-    justify-content: start;
+    justify-content: flex-start;
     padding: 11px 0;
     width: 100%;
     padding: 31px 10px 64px;
-}
-.menuForm {
-    margin-left: 60px;
-    max-width: 1044px;
-    width: 100%;
 }
 .menuBtn {
     width: 241px;
