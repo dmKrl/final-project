@@ -1,9 +1,23 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import { useForm } from 'react-hook-form';
 import s from '../../modals/add-new-adv/AddNewAdv.module.css';
 
 function FormModal(props) {
+    const {
+        register,
+        formState: { errors },
+        reset,
+        handleSubmit,
+    } = useForm();
+
+    function onSubmit() {
+        reset();
+    }
     return (
-        <form className={`${s.modalFormNewArt} ${s.formNewArt}`} action="">
+        <form
+            className={`${s.modalFormNewArt} ${s.formNewArt}`}
+            onSubmit={handleSubmit(onSubmit)}
+        >
             <div className={s.formNewArtBlock}>
                 <label htmlFor="">Название</label>
                 <input
@@ -13,7 +27,11 @@ function FormModal(props) {
                     value={props.newArtInput}
                     id="formName"
                     placeholder="Введите название"
+                    {...register('name', {
+                        required: 'Поле обязательно к заполнению',
+                    })}
                 />
+                <span>{errors?.name?.message}</span>
             </div>
             <div className={s.formNewArtBlock}>
                 <label htmlFor="">Описание</label>
@@ -57,11 +75,18 @@ function FormModal(props) {
             </div>
             <div className={`${s.formNewArtBlock} ${s.blockPrice}`}>
                 <label htmlFor="">Цена</label>
-                <input className={s.formNewArtInputPrice} type="text" />
+                <input
+                    className={s.formNewArtInputPrice}
+                    type="number"
+                    {...register('price', {
+                        required: 'Поле обязательно к заполнению',
+                    })}
+                />
+                <span>{errors?.price?.message}</span>
                 <div className={s.formNewArtInputPriceCover} />
             </div>
             <button
-                type="button"
+                type="submit"
                 className={`${s.formNewArtBtnPub} ${s.btnHov02}`}
             >
                 Опубликовать
