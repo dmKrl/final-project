@@ -49,17 +49,17 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
     console.debug('Результат запроса на обновление токена', { refreshResult });
 
-    if (!refreshResult.data.access_token) {
-        return forceLogout();
-    }
+    // if (!refreshResult.data.access_token) {
+    //     return forceLogout();
+    // }
 
     api.dispatch(setAuth({ ...auth, access: refreshResult.data.access }));
 
     const retryResult = await baseQuery(args, api, extraOptions);
 
-    if (retryResult?.error?.status === 401) {
-        return forceLogout();
-    }
+    // if (retryResult?.error?.status === 401) {
+    //     return forceLogout();
+    // }
 
     console.debug('Повторный запрос завершился успешно');
 
@@ -117,24 +117,6 @@ export const adsAPI = createApi({
     baseQuery: baseQueryWithReauth,
     tagTypes: ['Ads'],
     endpoints: (build) => ({
-        getAllAds: build.query({
-            query: () => ({
-                url: '/ads',
-            }),
-            providesTags: ['Ads'],
-        }),
-        getChoseAdv: build.query({
-            query: (pk) => ({
-                url: `/ads/${pk}`,
-            }),
-            providesTags: ['Ads'],
-        }),
-        getReviewsForAdv: build.query({
-            query: (pk) => ({
-                url: `/ads/${pk}/comments`,
-            }),
-            providesTags: ['Ads'],
-        }),
         getAdsAuthUser: build.query({
             query: () => ({
                 url: `/ads/me`,

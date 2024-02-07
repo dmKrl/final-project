@@ -3,13 +3,8 @@ import s from './MainSellerProfile.module.css';
 import HeadingH3 from '../heading-h3/HeadingH3';
 import ButtonShowNum from '../button-show-num/ButtonShowNum';
 import changeDate from '../../app/changeDate';
-import { adsUnRegisteredAPI } from '../../services/unRegisteredUserService';
 
-function MainSellerProfile() {
-    const choseAdvID = localStorage.getItem('advID');
-    const { data: getChoseAdv } = adsUnRegisteredAPI.useGetChoseAdvQuery(
-        Number(choseAdvID),
-    );
+function MainSellerProfile({ getChoseAdv }) {
     return (
         <div className={s.mainProfileSell}>
             <div className={s.profileSellContent}>

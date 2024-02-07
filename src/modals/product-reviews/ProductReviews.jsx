@@ -46,7 +46,7 @@ function ProductReviews() {
                                 </button>
                             </form>
                             <div className={s.modalReviews}>
-                                {getReviewsForAdv?.map((comment) => {
+                                {getReviewsForAdv?.map((comment, index) => {
                                     return (
                                         <Reviewer
                                             reviewName={comment.author.name}
@@ -55,6 +55,7 @@ function ProductReviews() {
                                                 comment.created_on,
                                             )}
                                             reviewTitle="Комментарий"
+                                            key={index}
                                         />
                                     );
                                 })}

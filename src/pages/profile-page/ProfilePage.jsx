@@ -18,7 +18,11 @@ function ProfilePage() {
                 <HeadingH2>Здравствуйте, {userData.name}!</HeadingH2>
                 <MainProfile userData={userData} />
                 <HeadingH3>Мои товары</HeadingH3>
-                <MainContentCards />
+                {!userAds?.length ? (
+                    'Список товаров пуст'
+                ) : (
+                    <MainContentCards cardAds={userAds} />
+                )}
             </div>
         </div>
     );
