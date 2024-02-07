@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { setAuth } from '../redux/slices/authSlice';
 
@@ -49,7 +50,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
     console.debug('Результат запроса на обновление токена', { refreshResult });
 
-    if (!refreshResult.data.access_token) {
+    if (refreshResult?.error?.status === 401) {
         return forceLogout();
     }
 
@@ -107,7 +108,20 @@ export const userAPI = createApi({
             query: () => ({
                 url: '/user',
             }),
-            providesTags: ['User'],
+            providesTags: (result) => ['User'],
+        }),
+        patchAuthUser: build.mutation({
+            query: ({ name, surname, city, phone }) => ({
+                method: 'PATCH',
+                url: '/user',
+                body: {
+                    name,
+                    surname,
+                    city,
+                    phone,
+                },
+            }),
+            invalidatesTags: ['User'],
         }),
     }),
 });
