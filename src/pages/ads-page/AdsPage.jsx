@@ -6,7 +6,6 @@ import MainContentCards from '../../components/main-content-cards/MainContentCar
 
 function MainPage() {
     const { data: allAds } = adsUnRegisteredAPI.useGetAllAdsQuery();
-    console.log(allAds);
 
     return (
         <div className={s.main}>

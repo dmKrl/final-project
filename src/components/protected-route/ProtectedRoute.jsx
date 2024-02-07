@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom';
 
 function ProtectedRoute({ redirectPath = '/auth' }) {
-    const userData = JSON.parse(localStorage.getItem('userDataInfo'));
+    const userData = localStorage.getItem('access__token');
     if (!userData || userData === null) {
         return <Navigate to={redirectPath} replace />;
     }

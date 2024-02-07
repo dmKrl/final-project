@@ -5,7 +5,7 @@ function Header() {
     return (
         <header className={s.header}>
             <nav className={s.headerNav}>
-                {!JSON.parse(localStorage.getItem('userDataInfo')) ? (
+                {!localStorage.getItem('access_token') ? (
                     <Link to="/auth">
                         <button
                             type="button"
