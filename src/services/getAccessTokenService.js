@@ -39,7 +39,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
             url: '/auth/login',
             method: 'PUT',
             body: {
-                access_token: auth.refresh,
+                access_token: auth.access,
                 refresh_token: auth.refresh,
             },
         },
@@ -53,7 +53,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     //     return forceLogout();
     // }
 
-    api.dispatch(setAuth({ ...auth, access: refreshResult.data.access }));
+    api.dispatch(setAuth({ ...auth, access: refreshResult.data.access_token }));
 
     const retryResult = await baseQuery(args, api, extraOptions);
 

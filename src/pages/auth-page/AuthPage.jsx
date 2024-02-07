@@ -39,8 +39,14 @@ function AuthPage() {
                     }),
                 );
                 fetchAuthUser();
-                localStorage.setItem('access', response?.data?.access_token);
-                localStorage.setItem('refresh', response?.data?.refresh_token);
+                localStorage.setItem(
+                    'access__token',
+                    response?.data?.access_token.toString(),
+                );
+                localStorage.setItem(
+                    'refresh__token',
+                    response?.data?.refresh_token.toString(),
+                );
             })
             .catch(() => {
                 localStorage.setItem('userDataInfo', null);

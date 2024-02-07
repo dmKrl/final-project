@@ -12,8 +12,6 @@ function SellerProfilePage() {
     const { data: getChoseAdv } = adsUnRegisteredAPI.useGetChoseAdvQuery(
         Number(choseAdvID),
     );
-    console.log(allAds);
-    console.log(getChoseAdv);
     function findAllUserAds() {
         return allAds?.filter((card) => {
             if (card.user.id === getChoseAdv?.user.id) {

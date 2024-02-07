@@ -27,7 +27,7 @@ function MainProfile({ userData }) {
                                 <input
                                     className={s.settingsFName}
                                     type="text"
-                                    value={name}
+                                    defaultValue={name}
                                 />
                             </div>
                             <div className={s.settingsDiv}>
@@ -35,7 +35,7 @@ function MainProfile({ userData }) {
                                 <input
                                     className={s.settingsLName}
                                     type="text"
-                                    value={surname}
+                                    defaultValue={surname}
                                 />
                             </div>
                             <div className={s.settingsDiv}>
@@ -43,7 +43,7 @@ function MainProfile({ userData }) {
                                 <input
                                     className={s.settingsCity}
                                     type="text"
-                                    value={city}
+                                    defaultValue={city}
                                 />
                             </div>
                             <div className={s.settingsDiv}>
@@ -53,7 +53,7 @@ function MainProfile({ userData }) {
                                     type="phone"
                                     name="phone"
                                     id="phone"
-                                    value={phone}
+                                    defaultValue={phone}
                                 />
                             </div>
 
