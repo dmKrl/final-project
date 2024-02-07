@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom';
 import s from './Header.module.css';
 
 function Header() {
+    console.log(localStorage.getItem('access_token'));
     return (
         <header className={s.header}>
             <nav className={s.headerNav}>
-                {!localStorage.getItem('access_token') ? (
+                {localStorage.getItem('access_token') === 'null' ? (
                     <Link to="/auth">
                         <button
                             type="button"
@@ -37,7 +38,7 @@ function Header() {
                                 type="button"
                                 className={`${s.headerBtnMainEnter} ${s.btnHov01}`}
                                 onClick={() =>
-                                    localStorage.setItem('userDataInfo', null)
+                                    localStorage.setItem('access_token', null)
                                 }
                             >
                                 Выйти

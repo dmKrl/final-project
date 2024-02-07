@@ -46,14 +46,12 @@ input span {
     object-fit: cover;
 }
 .settingsChangePhoto {
-    margin-top: 10px;
-    margin-bottom: 30px;
-    text-decoration: none;
-    font-size: 16px;
-    line-height: 24px;
-    border: none;
-    background: none;
+    display: none;
+}
+.settingsChangePhoto + label {
     color: #009ee4;
+    cursor: pointer;
+    margin-top: 20px;
 }
 .settingsRight {
     width: 630px;

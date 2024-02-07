@@ -25,11 +25,11 @@ function AuthPage() {
                 );
                 navigate('/profile');
                 localStorage.setItem(
-                    'access__token',
+                    'access_token',
                     response?.data?.access_token.toString(),
                 );
                 localStorage.setItem(
-                    'refresh__token',
+                    'refresh_token',
                     response?.data?.refresh_token.toString(),
                 );
             })

@@ -50,17 +50,17 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
     console.debug('Результат запроса на обновление токена', { refreshResult });
 
-    if (refreshResult?.error?.status === 401) {
-        return forceLogout();
-    }
+    // if (refreshResult?.error?.status === 401) {
+    //     return forceLogout();
+    // }
 
     api.dispatch(setAuth({ ...auth, access: refreshResult.data.access_token }));
 
     const retryResult = await baseQuery(args, api, extraOptions);
 
-    if (retryResult?.error?.status === 401) {
-        return forceLogout();
-    }
+    // if (retryResult?.error?.status === 401) {
+    //     return forceLogout();
+    // }
 
     console.debug('Повторный запрос завершился успешно');
 
@@ -119,6 +119,19 @@ export const userAPI = createApi({
                     surname,
                     city,
                     phone,
+                },
+            }),
+            invalidatesTags: ['User'],
+        }),
+        updateUserAvatar: build.mutation({
+            query: ({ file }) => ({
+                method: 'POST',
+                url: '/user/avatar',
+                body: {
+                    file,
+                },
+                headers: {
+                    'content-type': 'multipart/form-data',
                 },
             }),
             invalidatesTags: ['User'],

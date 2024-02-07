@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form';
 import { userAPI } from '../../services/getAccessTokenService';
 import s from '../main-profile/MainProfile.module.css';
 
-function FormProfile({ userData }) {
+function FormProfile({ userData, image }) {
+    console.log(image);
     const {
         register,
         formState: { errors },
@@ -11,6 +12,7 @@ function FormProfile({ userData }) {
         reset,
     } = useForm({ mode: 'onBlur' });
     const [patchUserAuth] = userAPI.usePatchAuthUserMutation();
+
     function onSubmit(data) {
         patchUserAuth(data);
         reset();
