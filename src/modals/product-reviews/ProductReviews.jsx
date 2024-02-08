@@ -11,6 +11,7 @@ function ProductReviews() {
 
     const { data: getReviewsForAdv } =
         commentsUnRegisteredAPI.useGetReviewsForAdvQuery(choseAdvID);
+    console.log(getReviewsForAdv);
     return (
         <div className={s.wrapper}>
             <div className={s.containerBg}>

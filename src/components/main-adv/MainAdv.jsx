@@ -5,7 +5,7 @@ import ButtonShowNum from '../button-show-num/ButtonShowNum';
 import ButtonChangeAdv from '../button-change-adv/ButtonChangeAdv';
 import changeDate from '../../app/changeDate';
 
-function MainAdv({ getChoseAdv }) {
+function MainAdv({ getChoseAdv, getReviewsForAdv }) {
     const loaction = useLocation();
     return (
         <div>
@@ -48,7 +48,7 @@ function MainAdv({ getChoseAdv }) {
                                 {getChoseAdv?.user?.city}
                             </p>
                             <Link className={s.articleLink} to="/reviews">
-                                23 отзыва
+                                {getReviewsForAdv?.length} отзыва
                             </Link>
                         </div>
                         <p className={s.articlePrice}>
