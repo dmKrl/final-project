@@ -17,6 +17,12 @@ export const adsUnRegisteredAPI = createApi({
             }),
             providesTags: ['Ads'],
         }),
+        getChoseImage: build.query({
+            query: (pk) => ({
+                url: `/images/${pk}`,
+            }),
+            providesTags: ['Ads'],
+        }),
     }),
 });
 export const commentsUnRegisteredAPI = createApi({

@@ -14,30 +14,22 @@ function MainAdv({ getChoseAdv }) {
                     <div className={s.articleLeft}>
                         <div className={s.articleFillImg}>
                             <div className={s.articleImg}>
-                                <img src="" alt="" />
+                                <img
+                                    src={`http://localhost:8090/${getChoseAdv?.images[0]?.url}`}
+                                    alt=""
+                                />
                             </div>
                             <div className={s.articleImgBar}>
-                                <div className={s.articleImgBarDiv}>
-                                    <img src="" alt="" />
-                                </div>
-                                <div className={s.articleImgBarDiv}>
-                                    <img src="" alt="" />
-                                </div>
-                                <div className={s.articleImgBarDiv}>
-                                    <img src="" alt="" />
-                                </div>
-                                <div className={s.articleImgBarDiv}>
-                                    <img src="" alt="" />
-                                </div>
-                                <div className={s.articleImgBarDiv}>
-                                    <img src="" alt="" />
-                                </div>
-                                <div className={s.articleImgBarDiv}>
-                                    <img src="" alt="" />
-                                </div>
-                                <div className={s.articleImgBarDiv}>
-                                    <img src="" alt="" />
-                                </div>
+                                {getChoseAdv?.images?.map((image) => {
+                                    return (
+                                        <div className={s.articleImgBarDiv}>
+                                            <img
+                                                src={`http://localhost:8090/${image?.url}`}
+                                                alt=""
+                                            />
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
                     </div>

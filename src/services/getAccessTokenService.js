@@ -26,6 +26,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     const forceLogout = () => {
         console.debug('Принудительная авторизация!');
         api.dispatch(setAuth(null));
+        localStorage.setItem('access_token', null);
         window.location.assign('/auth');
     };
 
@@ -37,7 +38,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
     const refreshResult = await baseQuery(
         {
-            url: '/auth/login',
+            url: '/auth/login/',
             method: 'PUT',
             body: {
                 access_token: auth.access,
@@ -50,17 +51,23 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
     console.debug('Результат запроса на обновление токена', { refreshResult });
 
-    // if (refreshResult?.error?.status === 401) {
-    //     return forceLogout();
-    // }
+    if (!refreshResult.data?.access_token) {
+        return forceLogout();
+    }
 
-    api.dispatch(setAuth({ ...auth, access: refreshResult.data.access_token }));
+    api.dispatch(
+        setAuth({
+            ...auth,
+            access: refreshResult.data?.access_token,
+            refresh: refreshResult.data?.refresh_token,
+        }),
+    );
 
     const retryResult = await baseQuery(args, api, extraOptions);
 
-    // if (retryResult?.error?.status === 401) {
-    //     return forceLogout();
-    // }
+    if (retryResult?.error?.status === 401) {
+        return forceLogout();
+    }
 
     console.debug('Повторный запрос завершился успешно');
 
