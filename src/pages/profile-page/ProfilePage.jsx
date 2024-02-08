@@ -9,7 +9,7 @@ import { adsAPI, userAPI } from '../../services/getAccessTokenService';
 function ProfilePage() {
     const { data: useInfo } = userAPI.useGetAuthUserQuery();
     const { data: userAds } = adsAPI.useGetAdsAuthUserQuery();
-
+    localStorage.setItem('userInfoData', JSON.stringify(useInfo));
     return (
         <div>
             <div className={s.mainContainer}>

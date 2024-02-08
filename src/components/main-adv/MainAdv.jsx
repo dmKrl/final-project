@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import HeadingH3 from '../heading-h3/HeadingH3';
 import s from './MainAdv.module.css';
 import ButtonShowNum from '../button-show-num/ButtonShowNum';
@@ -6,7 +6,11 @@ import ButtonChangeAdv from '../button-change-adv/ButtonChangeAdv';
 import changeDate from '../../app/changeDate';
 
 function MainAdv({ getChoseAdv, getReviewsForAdv }) {
-    const loaction = useLocation();
+    function compareIDUsers() {
+        const userInfoData = JSON.parse(localStorage.getItem('userInfoData'));
+        return getChoseAdv?.user?.id === userInfoData.id;
+    }
+
     return (
         <div>
             <div className={s.mainArtic}>
@@ -54,10 +58,10 @@ function MainAdv({ getChoseAdv, getReviewsForAdv }) {
                         <p className={s.articlePrice}>
                             {getChoseAdv?.price} рублей.
                         </p>
-                        {loaction.pathname === '/adv-page' ? (
-                            <ButtonShowNum />
-                        ) : (
+                        {compareIDUsers() ? (
                             <ButtonChangeAdv />
+                        ) : (
+                            <ButtonShowNum />
                         )}
 
                         <div className={s.articleAuthor}>

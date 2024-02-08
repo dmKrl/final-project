@@ -166,6 +166,34 @@ export const adsAPI = createApi({
                     description: data.description,
                     price: data.price,
                 },
+                headers: {
+                    'content-type': 'application/json',
+                },
+            }),
+            invalidatesTags: ['Ads'],
+        }),
+        updateUserAdv: build.mutation({
+            query: ({ data, pk }) => ({
+                method: 'PATCH',
+                url: `/ads/${pk}`,
+                body: {
+                    title: data.title,
+                    description: data.description,
+                    price: data.price,
+                },
+                headers: {
+                    'content-type': 'application/json',
+                },
+            }),
+            invalidatesTags: ['Ads'],
+        }),
+        deleteChosenAdv: build.mutation({
+            query: (pk) => ({
+                method: 'DELETE',
+                url: `/ads/${pk}`,
+                headers: {
+                    'content-type': 'application/json',
+                },
             }),
             invalidatesTags: ['Ads'],
         }),

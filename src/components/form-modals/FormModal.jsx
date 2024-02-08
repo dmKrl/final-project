@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useForm } from 'react-hook-form';
+import { useLocation } from 'react-router-dom';
 import s from '../../modals/add-new-adv/AddNewAdv.module.css';
 import { adsAPI } from '../../services/getAccessTokenService';
 
@@ -10,10 +11,15 @@ function FormModal(props) {
         reset,
         handleSubmit,
     } = useForm({ mode: 'onBlur' });
+    const location = useLocation();
     const [postAdv] = adsAPI.usePostAdvWithOnlyTextMutation();
-
+    const [updatePost] = adsAPI.useUpdateUserAdvMutation();
     function onSubmit(data) {
-        postAdv(data);
+        if (location.pathname === '/add-new-adv') {
+            postAdv(data);
+        } else {
+            updatePost({ data, pk: props.choseAdvID });
+        }
         reset();
         window.location.assign('/');
     }
@@ -28,7 +34,7 @@ function FormModal(props) {
                     className={s.formNewArtInput}
                     type="text"
                     name="name"
-                    value={props.newArtInput}
+                    defaultValue={props.newArtInput}
                     id="formName"
                     placeholder="Введите название"
                     {...register('title', {
@@ -42,7 +48,7 @@ function FormModal(props) {
                 <textarea
                     className={s.formNewArtArea}
                     name="text"
-                    value={props.newArtArea}
+                    defaultValue={props.newArtArea}
                     id="formArea"
                     cols="auto"
                     rows="10"
@@ -87,6 +93,7 @@ function FormModal(props) {
                 <input
                     className={s.formNewArtInputPrice}
                     type="number"
+                    defaultValue={props.newArtPrice}
                     {...register('price', {
                         required: 'Поле обязательно к заполнению',
                     })}
