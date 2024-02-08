@@ -379,3 +379,10 @@
 .blockPrice {
     position: relative;
 }
+.error {
+    color: red;
+}
+.errorBottom {
+    position: absolute;
+    top: 80px;
+}

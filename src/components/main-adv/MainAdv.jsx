@@ -20,9 +20,12 @@ function MainAdv({ getChoseAdv }) {
                                 />
                             </div>
                             <div className={s.articleImgBar}>
-                                {getChoseAdv?.images?.map((image) => {
+                                {getChoseAdv?.images?.map((image, index) => {
                                     return (
-                                        <div className={s.articleImgBarDiv}>
+                                        <div
+                                            className={s.articleImgBarDiv}
+                                            key={index}
+                                        >
                                             <img
                                                 src={`http://localhost:8090/${image?.url}`}
                                                 alt=""

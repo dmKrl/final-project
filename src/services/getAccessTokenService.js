@@ -155,7 +155,19 @@ export const adsAPI = createApi({
             query: () => ({
                 url: `/ads/me`,
             }),
-            providesTags: ['Ads'],
+            providesTags: (result) => ['Ads'],
+        }),
+        postAdvWithOnlyText: build.mutation({
+            query: (data) => ({
+                method: 'POST',
+                url: `/adstext`,
+                body: {
+                    title: data.title,
+                    description: data.description,
+                    price: data.price,
+                },
+            }),
+            invalidatesTags: ['Ads'],
         }),
     }),
 });

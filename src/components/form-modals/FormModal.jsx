@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useForm } from 'react-hook-form';
 import s from '../../modals/add-new-adv/AddNewAdv.module.css';
+import { adsAPI } from '../../services/getAccessTokenService';
 
 function FormModal(props) {
     const {
@@ -8,10 +9,13 @@ function FormModal(props) {
         formState: { errors },
         reset,
         handleSubmit,
-    } = useForm();
+    } = useForm({ mode: 'onBlur' });
+    const [postAdv] = adsAPI.usePostAdvWithOnlyTextMutation();
 
-    function onSubmit() {
+    function onSubmit(data) {
+        postAdv(data);
         reset();
+        window.location.assign('/');
     }
     return (
         <form
@@ -27,11 +31,11 @@ function FormModal(props) {
                     value={props.newArtInput}
                     id="formName"
                     placeholder="Введите название"
-                    {...register('name', {
+                    {...register('title', {
                         required: 'Поле обязательно к заполнению',
                     })}
                 />
-                <span>{errors?.name?.message}</span>
+                <span className={s.error}>{errors?.name?.message}</span>
             </div>
             <div className={s.formNewArtBlock}>
                 <label htmlFor="">Описание</label>
@@ -43,6 +47,7 @@ function FormModal(props) {
                     cols="auto"
                     rows="10"
                     placeholder="Введите описание"
+                    {...register('description')}
                 />
             </div>
             <div className={s.formNewArtBlock}>
@@ -52,8 +57,12 @@ function FormModal(props) {
                 </p>
                 <div className={s.formNewArtBarImg}>
                     <div className={s.formNewArtImg}>
-                        <img className={s.formNewArtImgCover} src="" alt="" />
-                        <div className={s.formNewArtImgCover} />
+                        <input
+                            className={s.formNewArtImgCover}
+                            type="file"
+                            src=""
+                            alt=""
+                        />
                     </div>
                     <div className={s.formNewArtImg}>
                         <img className={s.formNewArtImgCover} src="" alt="" />
@@ -82,8 +91,10 @@ function FormModal(props) {
                         required: 'Поле обязательно к заполнению',
                     })}
                 />
-                <span>{errors?.price?.message}</span>
                 <div className={s.formNewArtInputPriceCover} />
+                <span className={`${s.error} ${s.errorBottom}`}>
+                    {errors?.price?.message}
+                </span>
             </div>
             <button
                 type="submit"
