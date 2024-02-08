@@ -4,7 +4,8 @@ import { userAPI } from '../../services/getAccessTokenService';
 import s from '../main-profile/MainProfile.module.css';
 
 function FormProfile({ userData, image }) {
-    console.log(image);
+    const formData = new FormData();
+    formData.append('file', image);
     const {
         register,
         formState: { errors },
@@ -15,7 +16,7 @@ function FormProfile({ userData, image }) {
     const [updateUserAvatar] = userAPI.useUpdateUserAvatarMutation();
 
     function onSubmit(data) {
-        updateUserAvatar(image);
+        updateUserAvatar(formData);
         patchUserAuth(data);
         reset();
     }

@@ -131,15 +131,10 @@ export const userAPI = createApi({
             invalidatesTags: ['User'],
         }),
         updateUserAvatar: build.mutation({
-            query: ({ file }) => ({
+            query: (formData) => ({
                 method: 'POST',
                 url: '/user/avatar',
-                body: {
-                    file,
-                },
-                headers: {
-                    'content-type': 'multipart/form-data',
-                },
+                body: formData,
             }),
             invalidatesTags: ['User'],
         }),

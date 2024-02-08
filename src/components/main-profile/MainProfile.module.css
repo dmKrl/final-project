@@ -41,6 +41,7 @@ input span {
 .settingsImg img {
     width: 100%;
     height: auto;
+    border-radius: 50%;
     display: block;
     -o-object-fit: cover;
     object-fit: cover;
