@@ -12,8 +12,10 @@ function FormProfile({ userData, image }) {
         reset,
     } = useForm({ mode: 'onBlur' });
     const [patchUserAuth] = userAPI.usePatchAuthUserMutation();
+    const [updateUserAvatar] = userAPI.useUpdateUserAvatarMutation();
 
     function onSubmit(data) {
+        updateUserAvatar(image);
         patchUserAuth(data);
         reset();
     }

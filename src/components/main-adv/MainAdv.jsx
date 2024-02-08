@@ -66,7 +66,10 @@ function MainAdv({ getChoseAdv, getReviewsForAdv }) {
 
                         <div className={s.articleAuthor}>
                             <div className={s.authorImg}>
-                                <img src="" alt="" />
+                                <img
+                                    src={`http://localhost:8090/${getChoseAdv?.user?.avatar}`}
+                                    alt=""
+                                />
                             </div>
                             <div className={s.authorCont}>
                                 <button type="button">

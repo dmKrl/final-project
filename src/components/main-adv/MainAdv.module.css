@@ -194,9 +194,9 @@
 
 .authorImg {
     width: 40px;
+    border-radius: 50%;
     height: 40px;
     background-color: #f0f0f0;
-    border-radius: 50%;
 }
 
 .authorImg img {
@@ -204,6 +204,7 @@
     height: auto;
     display: block;
     -o-object-fit: cover;
+    border-radius: 50%;
     object-fit: cover;
 }
 

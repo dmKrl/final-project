@@ -5,6 +5,7 @@ import ButtonShowNum from '../button-show-num/ButtonShowNum';
 import changeDate from '../../app/changeDate';
 
 function MainSellerProfile({ getChoseAdv }) {
+    console.log(getChoseAdv);
     return (
         <div className={s.mainProfileSell}>
             <div className={s.profileSellContent}>
@@ -12,7 +13,10 @@ function MainSellerProfile({ getChoseAdv }) {
                     <div className={s.sellerLeft}>
                         <div className={s.sellerImg}>
                             <Link to="/">
-                                <img src="" alt="" />
+                                <img
+                                    src={`http://localhost:8090/${getChoseAdv?.user?.avatar}`}
+                                    alt="user-avatar"
+                                />
                             </Link>
                         </div>
                     </div>

@@ -27,7 +27,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
         console.debug('Принудительная авторизация!');
         // api.dispatch(setAuth(null));
         // localStorage.setItem('access_token', null);
-        // window.location.assign('/auth');
+        window.location.assign('/profile');
     };
 
     const { auth } = api.getState();

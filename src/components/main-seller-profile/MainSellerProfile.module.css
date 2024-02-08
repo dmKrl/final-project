@@ -93,13 +93,13 @@
     height: auto;
     display: block;
     -o-object-fit: cover;
+    border-radius: 50%;
     object-fit: cover;
 }
 
 .sellerRight {
     width: auto;
 }
-
 
 .sellerInf,
 .sellerCity {
