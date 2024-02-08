@@ -1,17 +1,30 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import HeadingH3 from '../../components/heading-h3/HeadingH3';
 import Reviewer from '../../components/reviewer/Reviewer';
 import s from './ProductReviews.module.css';
 import changeDate from '../../app/changeDate';
 import { commentsUnRegisteredAPI } from '../../services/unRegisteredUserService';
+import { commentsRegisteredAPI } from '../../services/getAccessTokenService';
 
 function ProductReviews() {
     const choseAdvID = localStorage.getItem('advID');
+    const {
+        register,
+        formState: { errors },
+        reset,
+        handleSubmit,
+    } = useForm({ mode: 'onBlur' });
+    const [addReview] = commentsRegisteredAPI.usePostReviewsMutation();
+
+    function onSubmit(data) {
+        addReview({ data, pk: choseAdvID });
+        reset();
+    }
 
     const { data: getReviewsForAdv } =
         commentsUnRegisteredAPI.useGetReviewsForAdvQuery(choseAdvID);
-    console.log(getReviewsForAdv);
     return (
         <div className={s.wrapper}>
             <div className={s.containerBg}>
@@ -27,20 +40,23 @@ function ProductReviews() {
                             <form
                                 className={`${s.modalFormNewArt} ${s.formNewArt}`}
                                 action="#"
+                                onSubmit={handleSubmit(onSubmit)}
                             >
                                 <div className={s.formNewArtBlock}>
                                     <label htmlFor="">Добавить отзыв</label>
-                                    <textarea
+                                    <input
+                                        {...register('review')}
                                         className={s.formNewArtArea}
                                         name="text"
                                         id="formArea"
-                                        cols="auto"
-                                        rows="5"
                                         placeholder="Введите описание"
                                     />
+                                    <span className={s.error}>
+                                        {errors?.review?.message}
+                                    </span>
                                 </div>
                                 <button
-                                    type="button"
+                                    type="submit"
                                     className={`${s.formNewArtBtnPub} ${s.btnHov02}`}
                                 >
                                     Опубликовать

@@ -28,13 +28,13 @@ export const adsUnRegisteredAPI = createApi({
 export const commentsUnRegisteredAPI = createApi({
     reducerPath: 'unRegisteredUserComments',
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8090/' }),
-    tagTypes: ['Ads'],
+    tagTypes: ['comments'],
     endpoints: (build) => ({
         getReviewsForAdv: build.query({
             query: (pk) => ({
                 url: `/ads/${pk}/comments`,
             }),
-            providesTags: ['Ads'],
+            providesTags: ['comments'],
         }),
     }),
 });

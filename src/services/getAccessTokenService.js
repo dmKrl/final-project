@@ -25,9 +25,9 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
     const forceLogout = () => {
         console.debug('Принудительная авторизация!');
-        api.dispatch(setAuth(null));
-        localStorage.setItem('access_token', null);
-        window.location.assign('/auth');
+        // api.dispatch(setAuth(null));
+        // localStorage.setItem('access_token', null);
+        // window.location.assign('/auth');
     };
 
     const { auth } = api.getState();
@@ -196,6 +196,23 @@ export const adsAPI = createApi({
                 },
             }),
             invalidatesTags: ['Ads'],
+        }),
+    }),
+});
+export const commentsRegisteredAPI = createApi({
+    reducerPath: 'unRegisteredUserComments',
+    baseQuery: baseQueryWithReauth,
+    tagTypes: ['comments'],
+    endpoints: (build) => ({
+        postReviews: build.mutation({
+            query: ({ data, pk }) => ({
+                method: 'POST',
+                url: `/ads/${pk}/comments`,
+                body: {
+                    text: data.review,
+                },
+            }),
+            invalidatesTags: ['comments'],
         }),
     }),
 });
