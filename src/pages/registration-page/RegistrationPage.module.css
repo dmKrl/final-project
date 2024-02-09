@@ -28,11 +28,10 @@
     padding: 43px 42px 47px;
 }
 .modalInputSignup {
-    margin-bottom: 38px;
+    margin-bottom: 32px;
 }
 .modalBtnSignupEnt {
-    width: 278px;
-    height: 62px;
+    padding: 20px 50px;
     background-color: #009ee4;
     border-radius: 6px;
     border: none;
@@ -51,8 +50,6 @@
     color: #f4f5f6;
 }
 .modalBtnSignupEnt span {
-    width: 100%;
-    height: 100%;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -74,4 +71,7 @@
 }
 .modalBtnSignupEnt:active {
     background-color: #0080c1;
+}
+.error {
+    color: red;
 }

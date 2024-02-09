@@ -1,7 +1,6 @@
-const urlLogin = 'http://localhost:8090/auth/login';
 const urlRegister = 'http://localhost:8090/auth/register';
 
-export const fetchPostRegister = async ({
+const fetchPostRegister = async ({
     email,
     password,
     city,
@@ -25,18 +24,4 @@ export const fetchPostRegister = async ({
     const data = await response.json();
     return data;
 };
-export const fetchPostLogin = async ({ email, password }) => {
-    const response = await fetch(urlLogin, {
-        method: 'POST',
-        url: '/auth/login',
-        body: JSON.stringify({
-            email,
-            password,
-        }),
-        headers: {
-            'content-type': 'application/json',
-        },
-    });
-    const data = await response.json();
-    return data;
-};
+export default fetchPostRegister;

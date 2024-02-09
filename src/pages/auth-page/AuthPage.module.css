@@ -11,8 +11,7 @@
     background-color: #f4f5f6;
 }
 .modalBtnEnter {
-    width: 278px;
-    height: 52px;
+    padding: 20px 100px;
     background-color: #009ee4;
     border-radius: 6px;
     margin-top: 60px;
@@ -48,8 +47,7 @@
     justify-content: center;
 }
 .modalBtnSignup {
-    width: 278px;
-    height: 52px;
+    padding: 20px 38px;
     background-color: transparent;
     border: 1px solid #d0cece;
     border-radius: 6px;
@@ -99,4 +97,7 @@
 }
 .modalBtnSignup:active {
     background-color: #d9d9d9;
+}
+.error {
+    color: red;
 }
