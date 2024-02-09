@@ -10,7 +10,7 @@ function FormProfile({ userData, image }) {
         formState: { errors },
         handleSubmit,
         reset,
-    } = useForm({ mode: 'onBlur' });
+    } = useForm();
     const [patchUserAuth] = userAPI.usePatchAuthUserMutation();
     const [updateUserAvatar] = userAPI.useUpdateUserAvatarMutation();
     formData.append('file', image);

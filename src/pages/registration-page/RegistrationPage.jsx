@@ -1,57 +1,65 @@
 import '../../App.css';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import s from './RegistrationPage.module.css';
 import { getAccessTokenAPI } from '../../services/getAccessTokenService';
-import { fetchPostRegister } from '../../api/api';
+import fetchPostRegister from '../../api/api';
 import { setAuth } from '../../redux/slices/authSlice';
 
 function RegistrationPage() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [repeatPassword, setRepeatPassword] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [city, setCity] = useState('');
-    const [phone, setPhone] = useState('');
     const [postAccessToken] = getAccessTokenAPI.usePostAccessTokenMutation();
     const dispatch = useDispatch();
-    const responseToken = () => {
-        postAccessToken({ email, password })
-            .then((response) => {
-                console.log(response);
-                dispatch(
-                    setAuth({
-                        access: response.data.access_token,
-                        refresh: response.data.refresh_token,
-                        user: JSON.parse(localStorage.getItem('userDataInfo')),
-                    }),
-                );
-                localStorage.setItem('access', response?.data?.access_token);
-                localStorage.setItem('refresh', response?.data?.refresh_token);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm({ mode: 'onBlur' });
+
+    const responseToken = ({ email, password }) => {
+        postAccessToken({ email, password }).then((response) => {
+            dispatch(
+                setAuth({
+                    access: response.data.access_token,
+                    refresh: response.data.refresh_token,
+                    user: JSON.parse(localStorage.getItem('userDataInfo')),
+                }),
+            );
+            localStorage.setItem(
+                'access_token',
+                response?.data?.access_token.toString(),
+            );
+            localStorage.setItem(
+                'refresh_token',
+                response?.data?.refresh_token.toString(),
+            );
+            window.location.assign('./profile');
+        });
     };
-    const fetchForRegistration = async () => {
+    const fetchForRegistration = async (data) => {
         try {
             console.log(1);
-            const response = await fetchPostRegister({
-                email,
-                password,
-                city,
-                firstName,
-                lastName,
-                phone,
+            await fetchPostRegister({
+                email: data.email,
+                password: data.password,
+                city: data.city,
+                firstName: data.firstName,
+                lastName: data.lastName,
+                phone: data.phone,
             });
-            responseToken();
-            console.log(response);
+            responseToken({ email: data.email, password: data.password });
         } catch (error) {
             console.log(error);
         }
     };
+
+    const onSubmit = (data) => {
+        fetchForRegistration(data);
+        reset();
+    };
+
     return (
         <div className={s.wrapper}>
             <div className={s.containerSignup}>
@@ -59,7 +67,7 @@ function RegistrationPage() {
                     <form
                         className={s.modalFormRegister}
                         action=""
-                        onSubmit={(event) => event.preventDefault()}
+                        onSubmit={handleSubmit(onSubmit)}
                     >
                         <div>
                             <Link to="/">
@@ -75,69 +83,68 @@ function RegistrationPage() {
                             type="text"
                             name="login"
                             placeholder="Введите email"
-                            value={email}
-                            onChange={(event) => setEmail(event.target.value)}
-                        />
+                            {...register('email', {
+                                required: 'Поле обязательно к заполнению',
+                            })}
+                        />{' '}
+                        <span className={s.error}>
+                            {errors?.email?.message}
+                        </span>
                         <input
                             className={`${s.modalInputSignup} modal__input password`}
                             type="password"
                             name="password"
                             placeholder="Введите пароль"
-                            value={password}
-                            onChange={(event) =>
-                                setPassword(event.target.value)
-                            }
-                        />
+                            {...register('password', {
+                                required: 'Поле обязательно к заполнению',
+                            })}
+                        />{' '}
+                        <span className={s.error}>
+                            {errors?.password?.message}
+                        </span>
                         <input
                             className={`${s.modalInputSignup} modal__input password`}
                             type="password"
                             name="repeat-password"
                             placeholder="Повторите пароль"
-                            value={repeatPassword}
-                            onChange={(event) =>
-                                setRepeatPassword(event.target.value)
-                            }
-                        />
+                            {...register('repeatPassword', {
+                                required: 'Поле обязательно к заполнению',
+                            })}
+                        />{' '}
+                        <span className={s.error}>
+                            {errors?.repeatPassword?.message}
+                        </span>
                         <input
                             className={`${s.modalInputSignup} modal__input`}
                             type="text"
                             name="first-name"
-                            value={firstName}
-                            onChange={(event) =>
-                                setFirstName(event.target.value)
-                            }
+                            {...register('firstName')}
                             placeholder="Имя (необязательно)"
                         />
                         <input
                             className={`${s.modalInputSignup} modal__input`}
                             type="text"
                             name="last-name"
-                            value={lastName}
-                            onChange={(event) =>
-                                setLastName(event.target.value)
-                            }
+                            {...register('lastName')}
                             placeholder="Фамилия (необязательно)"
                         />
                         <input
                             className={`${s.modalInputSignup} modal__input`}
                             type="text"
                             name="city"
-                            value={city}
-                            onChange={(event) => setCity(event.target.value)}
+                            {...register('city')}
                             placeholder="Город (необязательно)"
                         />
                         <input
                             className={`${s.modalInputSignup} modal__input`}
                             type="number"
-                            name="city"
-                            value={phone}
-                            onChange={(event) => setPhone(event.target.value)}
-                            placeholder="Номер телефона"
+                            name="phone"
+                            {...register('phone')}
+                            placeholder="Номер телефона (необязательно)"
                         />
                         <button
                             className={`${s.modalBtnSignupEnt}`}
-                            type="button"
-                            onClick={fetchForRegistration}
+                            type="submit"
                         >
                             <span>Зарегистрироваться</span>
                         </button>

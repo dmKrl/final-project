@@ -1,20 +1,24 @@
 import '../../App.css';
-import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 import s from './AuthPage.module.css';
 import { getAccessTokenAPI } from '../../services/getAccessTokenService';
 import { setAuth } from '../../redux/slices/authSlice';
 
 function AuthPage() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm({ mode: 'onBlur' });
+    const [error, setError] = useState();
     const [postAccessToken] = getAccessTokenAPI.usePostAccessTokenMutation();
     const dispatch = useDispatch();
-    const navigate = useNavigate();
-
-    const responseToken = () => {
-        postAccessToken({ email, password })
+    const responseToken = (data) => {
+        postAccessToken({ email: data.email, password: data.password })
             .then((response) => {
                 dispatch(
                     setAuth({
@@ -23,7 +27,6 @@ function AuthPage() {
                         user: JSON.parse(localStorage.getItem('userDataInfo')),
                     }),
                 );
-                navigate('/profile');
                 localStorage.setItem(
                     'access_token',
                     response?.data?.access_token.toString(),
@@ -32,10 +35,18 @@ function AuthPage() {
                     'refresh_token',
                     response?.data?.refresh_token.toString(),
                 );
+                window.location.assign('/profile');
+                setError('');
             })
             .catch(() => {
+                setError('Проверьте правильность ввода логина или пароля');
                 localStorage.setItem('userDataInfo', null);
             });
+    };
+    const onSubmit = (data) => {
+        setError('');
+        responseToken(data);
+        reset();
     };
 
     return (
@@ -45,7 +56,7 @@ function AuthPage() {
                     <form
                         className="modal__form-login"
                         action=""
-                        onSubmit={(event) => event.preventDefault()}
+                        onSubmit={handleSubmit(onSubmit)}
                     >
                         <div>
                             <Link to="/">
@@ -60,30 +71,35 @@ function AuthPage() {
                             className="modal__input login"
                             type="text"
                             name="login"
-                            value={email}
-                            onChange={(event) => setEmail(event.target.value)}
                             placeholder="Введите email"
+                            {...register('email', {
+                                required: 'Поле обязательно к заполнению',
+                            })}
                         />
+                        <span className={s.error}>
+                            {errors?.email?.message}
+                        </span>
+
                         <input
                             className="modal__input"
                             type="password"
                             name="password"
-                            value={password}
-                            onChange={(event) =>
-                                setPassword(event.target.value)
-                            }
                             placeholder="Введите пароль"
+                            {...register('password', {
+                                required: 'Поле обязательно к заполнению',
+                            })}
                         />
-                        <button
-                            className={`${s.modalBtnEnter}`}
-                            type="button"
-                            onClick={responseToken}
-                        >
+                        <span className={s.error}>
+                            {errors?.password?.message}
+                        </span>
+
+                        <button className={`${s.modalBtnEnter}`} type="submit">
                             <span>Войти</span>
                         </button>
                         <button className={`${s.modalBtnSignup}`} type="button">
                             <Link to="/registration">Зарегистрироваться</Link>
                         </button>
+                        {error ? <span className={s.error}>{error}</span> : ''}
                     </form>
                 </div>
             </div>
