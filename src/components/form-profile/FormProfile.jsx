@@ -5,7 +5,6 @@ import s from '../main-profile/MainProfile.module.css';
 
 function FormProfile({ userData, image }) {
     const formData = new FormData();
-    formData.append('file', image);
     const {
         register,
         formState: { errors },
@@ -14,6 +13,7 @@ function FormProfile({ userData, image }) {
     } = useForm({ mode: 'onBlur' });
     const [patchUserAuth] = userAPI.usePatchAuthUserMutation();
     const [updateUserAvatar] = userAPI.useUpdateUserAvatarMutation();
+    formData.append('file', image);
 
     function onSubmit(data) {
         updateUserAvatar(formData);

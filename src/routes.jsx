@@ -5,7 +5,6 @@ import AuthPage from './pages/auth-page/AuthPage';
 import AdsPage from './pages/ads-page/AdsPage';
 import RegistrationPage from './pages/registration-page/RegistrationPage';
 import AdvPage from './pages/adv-page/AdvPage';
-import MyAdvPage from './pages/my-adv-page/MyAdvPage';
 import SellerProfilePage from './pages/seller-profile-page/SellerProfilePage';
 import AddNewAdv from './modals/add-new-adv/AddNewAdv';
 import ProtectedRoute from './components/protected-route/ProtectedRoute';
@@ -23,7 +22,6 @@ function AppRoutes() {
                 <Route path="/adv-page/:id" element={<AdvPage />} />
                 <Route path="/reviews" element={<ProductReviews />} />
                 <Route element={<ProtectedRoute />}>
-                    <Route path="/my-adv-page" element={<MyAdvPage />} />
                     <Route path="/profile" element={<ProfilePage />} />
                     <Route path="/adv-settings" element={<AdvSettings />} />
                     <Route path="/add-new-adv" element={<AddNewAdv />} />

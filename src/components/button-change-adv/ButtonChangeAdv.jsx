@@ -8,7 +8,7 @@ function ButtonChangeAdv() {
 
     function deleteChoseAdv() {
         deleteAdv(choseAdvID);
-        // window.location.assign('/');
+        window.location.assign('/');
     }
 
     return (

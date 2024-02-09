@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 import HeadingH3 from '../../components/heading-h3/HeadingH3';
 import Reviewer from '../../components/reviewer/Reviewer';
 import s from './ProductReviews.module.css';
@@ -17,10 +18,12 @@ function ProductReviews() {
         handleSubmit,
     } = useForm({ mode: 'onBlur' });
     const [addReview] = commentsRegisteredAPI.usePostReviewsMutation();
+    const [valueInputReview, setValueInputReview] = useState();
 
     function onSubmit(data) {
         addReview({ data, pk: choseAdvID });
         reset();
+        window.location.reload();
     }
 
     const { data: getReviewsForAdv } =
@@ -39,17 +42,23 @@ function ProductReviews() {
                         <div className={s.modalScroll}>
                             <form
                                 className={`${s.modalFormNewArt} ${s.formNewArt}`}
-                                action="#"
                                 onSubmit={handleSubmit(onSubmit)}
                             >
                                 <div className={s.formNewArtBlock}>
                                     <label htmlFor="">Добавить отзыв</label>
                                     <input
-                                        {...register('review')}
                                         className={s.formNewArtArea}
                                         name="text"
+                                        defaultValue={valueInputReview}
+                                        onChange={(e) =>
+                                            setValueInputReview(e.target.value)
+                                        }
                                         id="formArea"
                                         placeholder="Введите описание"
+                                        {...register('review', {
+                                            required:
+                                                'Введите текст коментария ',
+                                        })}
                                     />
                                     <span className={s.error}>
                                         {errors?.review?.message}
