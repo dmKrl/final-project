@@ -10,6 +10,7 @@ function MainAdv({ getChoseAdv, getReviewsForAdv }) {
         const userInfoData = JSON.parse(localStorage.getItem('userInfoData'));
         return getChoseAdv?.user?.id === userInfoData.id;
     }
+    console.log(getChoseAdv);
 
     return (
         <div>
@@ -61,7 +62,9 @@ function MainAdv({ getChoseAdv, getReviewsForAdv }) {
                         {compareIDUsers() ? (
                             <ButtonChangeAdv />
                         ) : (
-                            <ButtonShowNum />
+                            <ButtonShowNum
+                                phoneNumber={getChoseAdv?.user?.phone}
+                            />
                         )}
 
                         <div className={s.articleAuthor}>

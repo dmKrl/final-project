@@ -5,7 +5,6 @@ import ButtonShowNum from '../button-show-num/ButtonShowNum';
 import changeDate from '../../app/changeDate';
 
 function MainSellerProfile({ getChoseAdv }) {
-    console.log(getChoseAdv);
     return (
         <div className={s.mainProfileSell}>
             <div className={s.profileSellContent}>
@@ -32,7 +31,7 @@ function MainSellerProfile({ getChoseAdv }) {
                             Продаёт товары с{' '}
                             {changeDate(getChoseAdv?.user?.sells_from)}
                         </p>
-                        <ButtonShowNum />
+                        <ButtonShowNum phoneNumber={getChoseAdv?.user?.phone} />
                     </div>
                 </div>
             </div>

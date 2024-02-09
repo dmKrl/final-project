@@ -39,6 +39,7 @@ function FormModal(props) {
                     }
                 });
         }
+        window.location.assign('/');
         reset();
     }
 
@@ -101,15 +102,33 @@ function FormModal(props) {
                         <div className={s.formNewArtImgCover} />
                     </div>
                     <div className={s.formNewArtImg}>
-                        <img className={s.formNewArtImgCover} src="" alt="" />
+                        <input
+                            className={s.formNewArtImgCover}
+                            type="file"
+                            src=""
+                            alt=""
+                            onChange={UploadUserAvatar}
+                        />
                         <div className={s.formNewArtImgCover} />
                     </div>
                     <div className={s.formNewArtImg}>
-                        <img className={s.formNewArtImgCover} src="" alt="" />
+                        <input
+                            className={s.formNewArtImgCover}
+                            type="file"
+                            src=""
+                            alt=""
+                            onChange={UploadUserAvatar}
+                        />
                         <div className={s.formNewArtImgCover} />
                     </div>
                     <div className={s.formNewArtImg}>
-                        <img className={s.formNewArtImgCover} src="" alt="" />
+                        <input
+                            className={s.formNewArtImgCover}
+                            type="file"
+                            src=""
+                            alt=""
+                            onChange={UploadUserAvatar}
+                        />
                         <div className={s.formNewArtImgCover} />
                     </div>
                 </div>

@@ -1,10 +1,20 @@
+import { useState } from 'react';
 import s from './ButtonShowNum.module.css';
 
-function ButtonShowNum() {
+function ButtonShowNum({ phoneNumber }) {
+    const [isShowingNumber, setIsShowingNumber] = useState(false);
     return (
-        <button type="button" className={s.articleBtn}>
+        <button
+            type="button"
+            className={s.articleBtn}
+            onClick={() => setIsShowingNumber(!isShowingNumber)}
+        >
             Показать телефон
-            <span>8 905 XXX XX XX</span>
+            {isShowingNumber ? (
+                <span>{phoneNumber}</span>
+            ) : (
+                <span>XXX XXX XX XX</span>
+            )}
         </button>
     );
 }

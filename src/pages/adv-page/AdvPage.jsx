@@ -8,7 +8,6 @@ import {
 
 function AdvPage() {
     const choseAdvID = localStorage.getItem('advID');
-    console.log(choseAdvID);
     const { data: getChoseAdv } = adsUnRegisteredAPI.useGetChoseAdvQuery(
         Number(choseAdvID),
     );

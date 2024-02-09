@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import s from './Header.module.css';
 
 function Header() {
-    console.log(localStorage.getItem('access_token'));
     return (
         <header className={s.header}>
             <nav className={s.headerNav}>
