@@ -182,6 +182,21 @@ export const adsAPI = createApi({
             }),
             invalidatesTags: ['Ads'],
         }),
+        postImagesAdv: build.mutation({
+            query: ({ data, pk }) => {
+                const formData = new FormData();
+
+                if (data) {
+                    formData.append(`file`, data);
+                }
+                return {
+                    method: 'POST',
+                    url: `/ads/${pk}/image`,
+                    body: formData,
+                };
+            },
+            invalidatesTags: ['Ads'],
+        }),
         updateUserAdv: build.mutation({
             query: ({ data, pk }) => ({
                 method: 'PATCH',

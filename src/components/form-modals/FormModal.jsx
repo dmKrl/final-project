@@ -1,28 +1,47 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useForm } from 'react-hook-form';
 import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
 import s from '../../modals/add-new-adv/AddNewAdv.module.css';
 import { adsAPI } from '../../services/getAccessTokenService';
 
 function FormModal(props) {
+    const location = useLocation();
+    const [image] = useState([]);
     const {
         register,
         formState: { errors },
         reset,
         handleSubmit,
     } = useForm({ mode: 'onBlur' });
-    const location = useLocation();
     const [postAdv] = adsAPI.usePostAdvWithOnlyTextMutation();
     const [updatePost] = adsAPI.useUpdateUserAdvMutation();
+    const [postImagesAdv] = adsAPI.usePostImagesAdvMutation();
+
+    function UploadUserAvatar(event) {
+        event.preventDefault();
+        const selectedFile = event.target.files[0];
+        image.push(selectedFile);
+    }
+
     function onSubmit(data) {
         if (location.pathname === '/add-new-adv') {
             postAdv(data);
         } else {
-            updatePost({ data, pk: props.choseAdvID });
+            updatePost({ data, pk: props.choseAdvID })
+                .unwrap()
+                .then((response) => {
+                    if (image) {
+                        for (let i = 0; i < image.length; i++) {
+                            postImagesAdv({ data: image[i], pk: response.id });
+                        }
+                    }
+                });
         }
         reset();
-        window.location.assign('/');
     }
+
     return (
         <form
             className={`${s.modalFormNewArt} ${s.formNewArt}`}
@@ -68,10 +87,17 @@ function FormModal(props) {
                             type="file"
                             src=""
                             alt=""
+                            onChange={UploadUserAvatar}
                         />
                     </div>
                     <div className={s.formNewArtImg}>
-                        <img className={s.formNewArtImgCover} src="" alt="" />
+                        <input
+                            className={s.formNewArtImgCover}
+                            type="file"
+                            src=""
+                            alt=""
+                            onChange={UploadUserAvatar}
+                        />
                         <div className={s.formNewArtImgCover} />
                     </div>
                     <div className={s.formNewArtImg}>

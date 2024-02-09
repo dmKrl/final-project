@@ -52,7 +52,7 @@ function MainAdv({ getChoseAdv, getReviewsForAdv }) {
                                 {getChoseAdv?.user?.city}
                             </p>
                             <Link className={s.articleLink} to="/reviews">
-                                {getReviewsForAdv?.length} отзыва
+                                {getReviewsForAdv?.length} отзывов
                             </Link>
                         </div>
                         <p className={s.articlePrice}>

@@ -7,7 +7,7 @@ import FormProfile from '../form-profile/FormProfile';
 
 function MainProfile({ userData }) {
     const [image, setImage] = useState('');
-    console.log(userData);
+
     function UploadUserAvatar(event) {
         event.preventDefault();
         const selectedFile = event.target.files[0];

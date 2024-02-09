@@ -9,7 +9,7 @@ function AdvSettings() {
     const { data: getChoseAdv } = adsUnRegisteredAPI.useGetChoseAdvQuery(
         Number(choseAdvID),
     );
-    const { title, description, price } = getChoseAdv;
+    console.log(getChoseAdv);
     return (
         <div className={s.wrapper}>
             <div className={s.containerBg}>
@@ -22,9 +22,9 @@ function AdvSettings() {
                             </Link>
                         </div>
                         <FormModal
-                            newArtArea={description}
-                            newArtInput={title}
-                            newArtPrice={price}
+                            newArtArea={getChoseAdv?.description}
+                            newArtInput={getChoseAdv?.title}
+                            newArtPrice={getChoseAdv?.price}
                             choseAdvID={Number(choseAdvID)}
                         />
                     </div>
