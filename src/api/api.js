@@ -6,6 +6,7 @@ const fetchPostRegister = async ({
     city,
     firstName,
     lastName,
+    phone,
 }) => {
     const response = await fetch(urlRegister, {
         method: 'POST',
@@ -16,6 +17,7 @@ const fetchPostRegister = async ({
             city,
             name: firstName,
             surname: lastName,
+            phone,
         }),
         headers: {
             'content-type': 'application/json',

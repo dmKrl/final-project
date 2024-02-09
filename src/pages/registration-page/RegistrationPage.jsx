@@ -19,28 +19,24 @@ function RegistrationPage() {
     } = useForm({ mode: 'onBlur' });
 
     const responseToken = ({ email, password }) => {
-        postAccessToken({ email, password })
-            .then((response) => {
-                dispatch(
-                    setAuth({
-                        access: response.data.access_token,
-                        refresh: response.data.refresh_token,
-                        user: JSON.parse(localStorage.getItem('userDataInfo')),
-                    }),
-                );
-                localStorage.setItem(
-                    'access_token',
-                    response?.data?.access_token.toString(),
-                );
-                localStorage.setItem(
-                    'refresh_token',
-                    response?.data?.refresh_token.toString(),
-                );
-                window.location.assign('./profile');
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        postAccessToken({ email, password }).then((response) => {
+            dispatch(
+                setAuth({
+                    access: response.data.access_token,
+                    refresh: response.data.refresh_token,
+                    user: JSON.parse(localStorage.getItem('userDataInfo')),
+                }),
+            );
+            localStorage.setItem(
+                'access_token',
+                response?.data?.access_token.toString(),
+            );
+            localStorage.setItem(
+                'refresh_token',
+                response?.data?.refresh_token.toString(),
+            );
+            window.location.assign('./profile');
+        });
     };
     const fetchForRegistration = async (data) => {
         try {
