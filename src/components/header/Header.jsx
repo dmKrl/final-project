@@ -5,7 +5,7 @@ function Header() {
     return (
         <header className={s.header}>
             <nav className={s.headerNav}>
-                {!JSON.parse(localStorage.getItem('userDataInfo')) ? (
+                {localStorage.getItem('access_token') === 'null' ? (
                     <Link to="/auth">
                         <button
                             type="button"
@@ -37,7 +37,7 @@ function Header() {
                                 type="button"
                                 className={`${s.headerBtnMainEnter} ${s.btnHov01}`}
                                 onClick={() =>
-                                    localStorage.setItem('userDataInfo', null)
+                                    localStorage.setItem('access_token', null)
                                 }
                             >
                                 Выйти

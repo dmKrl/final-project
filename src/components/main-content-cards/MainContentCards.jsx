@@ -1,14 +1,11 @@
 import { useSelector } from 'react-redux';
 import CardItem from '../UI/card-item/CardItem';
 import s from './MainContentCards.module.css';
-import { adsAPI } from '../../services/getAccessTokenService';
 import { selectFilterAds } from '../../redux/slices/filterSlice';
 
-function MainContentCards() {
-    const { data: allAds } = adsAPI.useGetAllAdsQuery();
-    console.log(allAds);
+function MainContentCards({ cardAds }) {
     const filterAds = useSelector(selectFilterAds);
-    const filteredAds = allAds?.filter((ads) => {
+    const filteredAds = cardAds?.filter((ads) => {
         const matchesNameTrack = ads.title
             .toLowerCase()
             .includes(filterAds.toLowerCase());

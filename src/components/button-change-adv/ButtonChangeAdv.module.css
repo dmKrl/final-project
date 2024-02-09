@@ -9,6 +9,9 @@
     color: #ffffff;
     margin-bottom: 10px;
 }
+.articleBtn a {
+    color: #ffffff;
+}
 .articleBtn:hover {
     background-color: #0080c1;
 }

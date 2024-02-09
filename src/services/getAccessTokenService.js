@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { setAuth } from '../redux/slices/authSlice';
 
@@ -24,8 +25,9 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
     const forceLogout = () => {
         console.debug('Принудительная авторизация!');
-        api.dispatch(setAuth(null));
-        window.location.assign('/auth');
+        // api.dispatch(setAuth(null));
+        // localStorage.setItem('access_token', null);
+        window.location.assign('/profile');
     };
 
     const { auth } = api.getState();
@@ -36,10 +38,11 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
     const refreshResult = await baseQuery(
         {
-            url: '/auth/login',
+            url: '/auth/login/',
             method: 'PUT',
             body: {
-                refresh: auth.refresh,
+                access_token: auth.access,
+                refresh_token: auth.refresh,
             },
         },
         api,
@@ -48,11 +51,17 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
     console.debug('Результат запроса на обновление токена', { refreshResult });
 
-    if (!refreshResult.data.access) {
+    if (!refreshResult.data?.access_token) {
         return forceLogout();
     }
 
-    api.dispatch(setAuth({ ...auth, access: refreshResult.data.access }));
+    api.dispatch(
+        setAuth({
+            ...auth,
+            access: refreshResult.data?.access_token,
+            refresh: refreshResult.data?.refresh_token,
+        }),
+    );
 
     const retryResult = await baseQuery(args, api, extraOptions);
 
@@ -102,11 +111,32 @@ export const userAPI = createApi({
     baseQuery: baseQueryWithReauth,
     tagTypes: ['User'],
     endpoints: (build) => ({
-        getAuthUser: build.mutation({
+        getAuthUser: build.query({
             query: () => ({
                 url: '/user',
             }),
-            providesTags: ['User'],
+            providesTags: (result) => ['User'],
+        }),
+        patchAuthUser: build.mutation({
+            query: ({ name, surname, city, phone }) => ({
+                method: 'PATCH',
+                url: '/user',
+                body: {
+                    name,
+                    surname,
+                    city,
+                    phone,
+                },
+            }),
+            invalidatesTags: ['User'],
+        }),
+        updateUserAvatar: build.mutation({
+            query: (formData) => ({
+                method: 'POST',
+                url: '/user/avatar',
+                body: formData,
+            }),
+            invalidatesTags: ['User'],
         }),
     }),
 });
@@ -116,23 +146,98 @@ export const adsAPI = createApi({
     baseQuery: baseQueryWithReauth,
     tagTypes: ['Ads'],
     endpoints: (build) => ({
-        getAllAds: build.query({
+        getAdsAuthUser: build.query({
             query: () => ({
-                url: '/ads',
+                url: `/ads/me`,
             }),
-            providesTags: ['Ads'],
+            providesTags: (result) => ['Ads'],
         }),
-        getChoseAdv: build.query({
-            query: (pk) => ({
+        postAdvWithOnlyText: build.mutation({
+            query: (data) => ({
+                method: 'POST',
+                url: `/adstext`,
+                body: {
+                    title: data.title,
+                    description: data.description,
+                    price: data.price,
+                },
+                headers: {
+                    'content-type': 'application/json',
+                },
+            }),
+            invalidatesTags: ['Ads'],
+        }),
+        postAdv: build.mutation({
+            query: (data) => ({
+                method: 'POST',
+                url: `/ads`,
+                body: {
+                    title: data.title,
+                    description: data.description,
+                    price: data.price,
+                },
+                headers: {
+                    'content-type': 'application/json',
+                },
+            }),
+            invalidatesTags: ['Ads'],
+        }),
+        postImagesAdv: build.mutation({
+            query: ({ data, pk }) => {
+                const formData = new FormData();
+
+                if (data) {
+                    formData.append(`file`, data);
+                }
+                return {
+                    method: 'POST',
+                    url: `/ads/${pk}/image`,
+                    body: formData,
+                };
+            },
+            invalidatesTags: ['Ads'],
+        }),
+        updateUserAdv: build.mutation({
+            query: ({ data, pk }) => ({
+                method: 'PATCH',
                 url: `/ads/${pk}`,
+                body: {
+                    title: data.title,
+                    description: data.description,
+                    price: data.price,
+                },
+                headers: {
+                    'content-type': 'application/json',
+                },
             }),
-            providesTags: ['Ads'],
+            invalidatesTags: ['Ads'],
         }),
-        getReviewsForAdv: build.query({
+        deleteChosenAdv: build.mutation({
             query: (pk) => ({
-                url: `/ads/${pk}/comments`,
+                method: 'DELETE',
+                url: `/ads/${pk}`,
+                headers: {
+                    'content-type': 'application/json',
+                },
             }),
-            providesTags: ['Ads'],
+            invalidatesTags: ['Ads'],
+        }),
+    }),
+});
+export const commentsRegisteredAPI = createApi({
+    reducerPath: 'unRegisteredUserComments',
+    baseQuery: baseQueryWithReauth,
+    tagTypes: ['comments'],
+    endpoints: (build) => ({
+        postReviews: build.mutation({
+            query: ({ data, pk }) => ({
+                method: 'POST',
+                url: `/ads/${pk}/comments`,
+                body: {
+                    text: data.review,
+                },
+            }),
+            invalidatesTags: ['comments'],
         }),
     }),
 });

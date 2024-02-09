@@ -2,14 +2,9 @@ import { Link } from 'react-router-dom';
 import s from './MainSellerProfile.module.css';
 import HeadingH3 from '../heading-h3/HeadingH3';
 import ButtonShowNum from '../button-show-num/ButtonShowNum';
-import { adsAPI } from '../../services/getAccessTokenService';
 import changeDate from '../../app/changeDate';
 
-function MainSellerProfile() {
-    const choseAdvID = localStorage.getItem('advID');
-    const { data: getChoseAdv } = adsAPI.useGetChoseAdvQuery(
-        Number(choseAdvID),
-    );
+function MainSellerProfile({ getChoseAdv }) {
     return (
         <div className={s.mainProfileSell}>
             <div className={s.profileSellContent}>
@@ -17,7 +12,10 @@ function MainSellerProfile() {
                     <div className={s.sellerLeft}>
                         <div className={s.sellerImg}>
                             <Link to="/">
-                                <img src="" alt="" />
+                                <img
+                                    src={`http://localhost:8090/${getChoseAdv?.user?.avatar}`}
+                                    alt="user-avatar"
+                                />
                             </Link>
                         </div>
                     </div>
@@ -33,7 +31,7 @@ function MainSellerProfile() {
                             Продаёт товары с{' '}
                             {changeDate(getChoseAdv?.user?.sells_from)}
                         </p>
-                        <ButtonShowNum />
+                        <ButtonShowNum phoneNumber={getChoseAdv?.user?.phone} />
                     </div>
                 </div>
             </div>
