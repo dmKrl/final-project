@@ -167,21 +167,6 @@ export const adsAPI = createApi({
             }),
             invalidatesTags: ['Ads'],
         }),
-        postAdv: build.mutation({
-            query: (data) => ({
-                method: 'POST',
-                url: `/ads`,
-                body: {
-                    title: data.title,
-                    description: data.description,
-                    price: data.price,
-                },
-                headers: {
-                    'content-type': 'application/json',
-                },
-            }),
-            invalidatesTags: ['Ads'],
-        }),
         postImagesAdv: build.mutation({
             query: ({ data, pk }) => {
                 const formData = new FormData();
