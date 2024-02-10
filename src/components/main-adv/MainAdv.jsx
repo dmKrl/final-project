@@ -76,12 +76,21 @@ function MainAdv({ getChoseAdv, getReviewsForAdv }) {
                             </div>
                             <div className={s.authorCont}>
                                 <button type="button">
-                                    <Link
-                                        to="/seller-profile"
-                                        className={s.authorName}
-                                    >
-                                        {getChoseAdv?.user?.name}
-                                    </Link>
+                                    {compareIDUsers() ? (
+                                        <Link
+                                            to="/profile"
+                                            className={s.authorName}
+                                        >
+                                            {getChoseAdv?.user?.name}
+                                        </Link>
+                                    ) : (
+                                        <Link
+                                            to="/seller-profile"
+                                            className={s.authorName}
+                                        >
+                                            {getChoseAdv?.user?.name}
+                                        </Link>
+                                    )}
                                 </button>
                                 <p className={s.authorAbout}>
                                     Продаёт товары с{' '}
