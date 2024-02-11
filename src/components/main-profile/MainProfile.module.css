@@ -151,6 +151,9 @@ input span {
     border-radius: 6px;
     border: 1px solid #009ee4;
 }
+.settingsBtn a {
+    color: #ffffff;
+}
 .settingsBtn:hover {
     background-color: #0080c1;
 }

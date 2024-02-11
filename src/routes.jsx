@@ -10,6 +10,7 @@ import AddNewAdv from './modals/add-new-adv/AddNewAdv';
 import ProtectedRoute from './components/protected-route/ProtectedRoute';
 import ProductReviews from './modals/product-reviews/ProductReviews';
 import AdvSettings from './modals/adv-settings/AdvSettings';
+import SetPassword from './modals/set-password/SetPassword';
 
 function AppRoutes() {
     return (
@@ -25,6 +26,7 @@ function AppRoutes() {
                     <Route path="/profile" element={<ProfilePage />} />
                     <Route path="/adv-settings" element={<AdvSettings />} />
                     <Route path="/add-new-adv" element={<AddNewAdv />} />
+                    <Route path="/set-password" element={<SetPassword />} />
                 </Route>
             </Route>
         </Routes>

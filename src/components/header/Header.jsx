@@ -6,6 +6,7 @@ import { setAuth } from '../../redux/slices/authSlice';
 function Header() {
     const dispatch = useDispatch();
     const userData = localStorage.getItem('access_token');
+    console.log(userData);
     return (
         <header className={s.header}>
             <nav className={s.headerNav}>

@@ -138,6 +138,17 @@ export const userAPI = createApi({
             }),
             invalidatesTags: ['User'],
         }),
+        setUserPassword: build.mutation({
+            query: (data) => ({
+                method: 'PUT',
+                url: '/user/password',
+                body: {
+                    password_1: data.password_1,
+                    password_2: data.password_2,
+                },
+            }),
+            invalidatesTags: ['User'],
+        }),
     }),
 });
 

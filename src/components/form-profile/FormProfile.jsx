@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import { userAPI } from '../../services/getAccessTokenService';
 import s from '../main-profile/MainProfile.module.css';
 
@@ -95,6 +96,9 @@ function FormProfile({ userData, image }) {
 
             <button className={s.settingsBtn} type="submit">
                 Сохранить
+            </button>
+            <button className={s.settingsBtn} type="button">
+                <Link to="/set-password">Изменить пароль</Link>
             </button>
         </form>
     );
