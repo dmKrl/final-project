@@ -7,7 +7,7 @@ import { setFilteredAds } from '../../redux/slices/filterSlice';
 function Search() {
     const dispatch = useDispatch();
     const [filterValue, setFilterValue] = useState(null);
-    console.log(filterValue);
+
     function handleFilterAds() {
         if (filterValue === null) {
             return;
