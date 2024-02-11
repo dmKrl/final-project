@@ -17,10 +17,14 @@ function CardItem({ ad }) {
                     onClick={addToStoreSelectedAdv}
                 >
                     <div className={s.cardImage}>
-                        <img
-                            src={`http://localhost:8090/${images[0]?.url}`}
-                            alt=""
-                        />
+                        {!images[0]?.url ? (
+                            'Нет фото'
+                        ) : (
+                            <img
+                                src={`http://localhost:8090/${images[0]?.url}`}
+                                alt=""
+                            />
+                        )}
                     </div>
                     <div className={s.cardContent}>
                         <h3 className={s.cardTitle}>{title}</h3>

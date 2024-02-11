@@ -13,13 +13,16 @@
     flex-direction: column;
 }
 .cardImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 270px;
     min-height: 270px;
     background-color: #f0f0f0;
 }
 .cardImage img {
     width: 100%;
-    height: 100%;
+    height: 270px;
     display: block;
     object-fit: cover;
 }

@@ -36,7 +36,12 @@ function FormModal(props) {
         };
     }
 
-    function clearStateWithImages() {
+    function redirectToAdvPage(id) {
+        localStorage.setItem('advID', id);
+        window.location.assign(`/adv-page/${localStorage.getItem('advID')}`);
+    }
+
+    function clearStatesWithImages() {
         setImages([]);
         dispatch(clearImagesPreLoad());
     }
@@ -48,12 +53,11 @@ function FormModal(props) {
             return;
         }
         images.push(selectedFile);
-        console.log(images);
         changePreLoadImage(selectedFile);
     }
 
     function onSubmit(data) {
-        clearStateWithImages();
+        clearStatesWithImages();
         if (location.pathname === '/add-new-adv') {
             postAdvWithOnlyText(data)
                 .unwrap()
@@ -63,8 +67,7 @@ function FormModal(props) {
                             postImagesAdv({ data: images[i], pk: response.id });
                         }
                     }
-                    // const advID = localStorage.setItem('advID', response.id);
-                    // window.location.assign(`/adv-page/${advID}`);
+                    redirectToAdvPage(response.id);
                 });
         } else {
             updatePost({ data, pk: props.choseAdvID })
@@ -75,8 +78,7 @@ function FormModal(props) {
                             postImagesAdv({ data: images[i], pk: response.id });
                         }
                     }
-                    // const advID = localStorage.setItem('advID', response.id);
-                    // window.location.assign(`/adv-page/${advID}`);
+                    redirectToAdvPage(response.id);
                 });
         }
         reset();
