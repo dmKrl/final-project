@@ -35,6 +35,8 @@ function FormModal(props) {
                             postImagesAdv({ data: images[i], pk: response.id });
                         }
                     }
+                    const advID = localStorage.setItem('advID', response.id);
+                    window.location.assign(`/adv-page/${advID}`);
                 });
         } else {
             updatePost({ data, pk: props.choseAdvID })
@@ -45,9 +47,10 @@ function FormModal(props) {
                             postImagesAdv({ data: images[i], pk: response.id });
                         }
                     }
+                    const advID = localStorage.setItem('advID', response.id);
+                    window.location.assign(`/adv-page/${advID}`);
                 });
         }
-        // window.location.assign('/');
         reset();
     }
 
