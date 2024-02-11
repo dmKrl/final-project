@@ -212,7 +212,7 @@ export const adsAPI = createApi({
 export const commentsRegisteredAPI = createApi({
     reducerPath: 'unRegisteredUserComments',
     baseQuery: baseQueryWithReauth,
-    tagTypes: ['comments'],
+    tagTypes: ['Comments'],
     endpoints: (build) => ({
         postReviews: build.mutation({
             query: ({ data, pk }) => ({
@@ -222,7 +222,7 @@ export const commentsRegisteredAPI = createApi({
                     text: data.review,
                 },
             }),
-            invalidatesTags: ['comments'],
+            invalidatesTags: [{ type: 'Comments', id: 'LIST' }],
         }),
     }),
 });

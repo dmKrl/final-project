@@ -17,17 +17,16 @@ function ProductReviews() {
         reset,
         handleSubmit,
     } = useForm({ mode: 'onBlur' });
+    const { data: getReviewsForAdv } =
+        commentsUnRegisteredAPI.useGetReviewsForAdvQuery(choseAdvID);
     const [addReview] = commentsRegisteredAPI.usePostReviewsMutation();
     const [valueInputReview, setValueInputReview] = useState();
 
     function onSubmit(data) {
         addReview({ data, pk: choseAdvID });
         reset();
-        window.location.reload();
     }
 
-    const { data: getReviewsForAdv } =
-        commentsUnRegisteredAPI.useGetReviewsForAdvQuery(choseAdvID);
     return (
         <div className={s.wrapper}>
             <div className={s.containerBg}>
