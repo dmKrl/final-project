@@ -11,24 +11,24 @@ function CardItem({ ad }) {
     return (
         <div className={s.cardsItem}>
             <div className={s.cardsCard}>
-                <div className={s.cardImage}>
-                    <Link to="/" className="">
+                <Link
+                    to={`/adv-page/${ad.id}`}
+                    className=""
+                    onClick={addToStoreSelectedAdv}
+                >
+                    <div className={s.cardImage}>
                         <img
                             src={`http://localhost:8090/${images[0]?.url}`}
                             alt=""
                         />
-                    </Link>
-                </div>
-                <div className={s.cardContent}>
-                    <button type="button" onClick={addToStoreSelectedAdv}>
-                        <Link to={`/adv-page/${ad.id}`} className="">
-                            <h3 className={s.cardTitle}>{title}</h3>
-                        </Link>
-                    </button>
-                    <p className={s.cardPrice}>{price} руб.</p>
-                    <p className={s.cardPlace}>{description}</p>
-                    <p className={s.cardDate}>{changeDate(createdOn)}</p>
-                </div>
+                    </div>
+                    <div className={s.cardContent}>
+                        <h3 className={s.cardTitle}>{title}</h3>
+                        <p className={s.cardPrice}>{price} руб.</p>
+                        <p className={s.cardPlace}>{description}</p>
+                        <p className={s.cardDate}>{changeDate(createdOn)}</p>
+                    </div>
+                </Link>
             </div>
         </div>
     );
