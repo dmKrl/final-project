@@ -5,10 +5,11 @@ import { setAuth } from '../../redux/slices/authSlice';
 
 function Header() {
     const dispatch = useDispatch();
+    const userData = localStorage.getItem('access_token');
     return (
         <header className={s.header}>
             <nav className={s.headerNav}>
-                {localStorage.getItem('access_token') === 'null' ? (
+                {userData === 'null' || !userData ? (
                     <Link to="/auth">
                         <button
                             type="button"
