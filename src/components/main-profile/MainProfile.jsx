@@ -9,15 +9,19 @@ function MainProfile({ userData }) {
     const [image, setImage] = useState('');
     const [imagePreLoad, setImagePreLoad] = useState('');
 
+    function changePreLoadImage(selectedImage) {
+        const reader = new FileReader();
+        reader.readAsDataURL(selectedImage);
+        reader.onloadend = () => {
+            setImagePreLoad(reader.result);
+        };
+    }
+
     function UploadUserAvatar(event) {
         event.preventDefault();
         const selectedFile = event.target.files[0];
         setImage(selectedFile);
-        const reader = new FileReader();
-        reader.readAsDataURL(selectedFile);
-        reader.onloadend = () => {
-            setImagePreLoad(reader.result);
-        };
+        changePreLoadImage(selectedFile);
     }
     return (
         <div className={s.mainProfile}>

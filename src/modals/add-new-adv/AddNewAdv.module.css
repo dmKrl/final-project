@@ -246,22 +246,25 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
+    justify-content: center;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-    justify-content: space-between;
     margin-bottom: 10px;
     overflow: hidden;
 }
 
-.formNewArtImgCover {
+.formNewArtInputCover {
+    display: none;
+}
+.formNewArtInputCover + label {
+    display: flex;
     width: 100%;
     height: 100%;
     background-color: #f0f0f0;
-    z-index: -1;
+    z-index: 2;
 }
-
-.formNewArtImgCover::after,
-.formNewArtImgCover::before {
+.formNewArtInputCover + label::after,
+.formNewArtInputCover + label::before {
     content: '';
     position: absolute;
     width: 30px;
@@ -272,7 +275,7 @@
     right: calc(50% - (30px / 2));
 }
 
-.formNewArtImgCover::before {
+.formNewArtInputCover + label::before {
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
 }
@@ -287,8 +290,10 @@
 
 .formNewArtImg img {
     display: block;
+    position: relative;
+    bottom: 0px;
     width: 100%;
-    height: auto;
+    height: 90px;
     -o-object-fit: cover;
     object-fit: cover;
     z-index: 2;
