@@ -10,7 +10,6 @@ function MainAdv({ getChoseAdv, getReviewsForAdv }) {
         const userInfoData = JSON.parse(localStorage.getItem('userInfoData'));
         return getChoseAdv?.user?.id === userInfoData.id;
     }
-    console.log(getChoseAdv);
 
     return (
         <div>
