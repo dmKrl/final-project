@@ -32,7 +32,11 @@ CSS Modules
 Откройте http://localhost:3000, чтобы просмотреть приложение.
 
 ## Запуск бэкенд части приложения:
-Через терминал необходимо перейти в папку backend
-Запустить в терминале команду:docker-compose -f docker-compose-backend.yaml up -d
-После этого бэкенд и Swagger будут доступны по адресу http://localhost:8090/
-Чтобы остановить работу бэкенда выполните:docker-compose down
+Через терминал необходимо перейти в папку backend;
+Запустить в терминале команду:docker-compose -f docker-compose-backend.yaml up -d;
+После этого бэкенд и Swagger будут доступны по адресу http://localhost:8090/;
+Чтобы остановить работу бэкенда выполните:docker-compose down.
+
+
+
+
