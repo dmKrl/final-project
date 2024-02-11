@@ -57,28 +57,33 @@ function FormModal(props) {
     }
 
     function onSubmit(data) {
-        clearStatesWithImages();
         if (location.pathname === '/add-new-adv') {
             postAdvWithOnlyText(data)
                 .unwrap()
-                .then((response) => {
+                .then(async (response) => {
                     if (images) {
                         for (let i = 0; i < images.length; i++) {
                             postImagesAdv({ data: images[i], pk: response.id });
                         }
+                        setTimeout(() => {
+                            clearStatesWithImages();
+                            redirectToAdvPage(response.id);
+                        }, 200);
                     }
-                    redirectToAdvPage(response.id);
                 });
         } else {
             updatePost({ data, pk: props.choseAdvID })
                 .unwrap()
-                .then((response) => {
+                .then(async (response) => {
                     if (images) {
                         for (let i = 0; i < images.length; i++) {
                             postImagesAdv({ data: images[i], pk: response.id });
                         }
+                        setTimeout(() => {
+                            clearStatesWithImages();
+                            redirectToAdvPage(response.id);
+                        }, 200);
                     }
-                    redirectToAdvPage(response.id);
                 });
         }
         reset();

@@ -7,8 +7,7 @@ function ButtonChangeAdv() {
     const [deleteAdv] = adsAPI.useDeleteChosenAdvMutation();
 
     function deleteChoseAdv() {
-        deleteAdv(choseAdvID);
-        window.location.assign('/');
+        deleteAdv(choseAdvID).then(() => window.location.assign('/'));
     }
 
     return (
