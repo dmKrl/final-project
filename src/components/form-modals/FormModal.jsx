@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import s from '../../modals/add-new-adv/AddNewAdv.module.css';
 import { adsAPI } from '../../services/getAccessTokenService';
 import {
+    clearImagesPreLoad,
     selectImagesPreLoad,
     setImagesPreLoad,
 } from '../../redux/slices/adsSlice';
@@ -15,7 +16,7 @@ import NewArtInputCover from '../UI/new-art-input-cover/NewArtInputCover';
 function FormModal(props) {
     const location = useLocation();
     const dispatch = useDispatch();
-    const [images] = useState([]);
+    const [images, setImages] = useState([]);
     const {
         register,
         formState: { errors },
@@ -35,6 +36,11 @@ function FormModal(props) {
         };
     }
 
+    function clearStateWithImages() {
+        setImages([]);
+        dispatch(clearImagesPreLoad());
+    }
+
     function UploadUserAvatar(event) {
         event.preventDefault();
         const selectedFile = event.target.files[0];
@@ -42,10 +48,12 @@ function FormModal(props) {
             return;
         }
         images.push(selectedFile);
+        console.log(images);
         changePreLoadImage(selectedFile);
     }
 
     function onSubmit(data) {
+        clearStateWithImages();
         if (location.pathname === '/add-new-adv') {
             postAdvWithOnlyText(data)
                 .unwrap()
@@ -55,8 +63,8 @@ function FormModal(props) {
                             postImagesAdv({ data: images[i], pk: response.id });
                         }
                     }
-                    const advID = localStorage.setItem('advID', response.id);
-                    window.location.assign(`/adv-page/${advID}`);
+                    // const advID = localStorage.setItem('advID', response.id);
+                    // window.location.assign(`/adv-page/${advID}`);
                 });
         } else {
             updatePost({ data, pk: props.choseAdvID })
@@ -67,8 +75,8 @@ function FormModal(props) {
                             postImagesAdv({ data: images[i], pk: response.id });
                         }
                     }
-                    const advID = localStorage.setItem('advID', response.id);
-                    window.location.assign(`/adv-page/${advID}`);
+                    // const advID = localStorage.setItem('advID', response.id);
+                    // window.location.assign(`/adv-page/${advID}`);
                 });
         }
         reset();
