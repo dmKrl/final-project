@@ -11,7 +11,7 @@ function NewArtInputCover({ UploadUserAvatar, imagesPreLoad }) {
                 onChange={UploadUserAvatar}
             />
             {imagesPreLoad ? (
-                <img src={`http://localhost:8090/${imagesPreLoad}`} alt="" />
+                <img src={imagesPreLoad} alt="" />
             ) : (
                 <label htmlFor="input1" className={s.formNewArtImgCover} />
             )}

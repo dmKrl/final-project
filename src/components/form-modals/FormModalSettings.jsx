@@ -115,36 +115,40 @@ function FormModalSettings(props) {
                         UploadUserAvatar={UploadUserAvatar}
                         imagesPreLoad={
                             props?.getChoseAdv?.images[0]?.url
-                                ? props?.getChoseAdv?.images[0]?.url
+                                ? `http://localhost:8090/${props?.getChoseAdv?.images[0]?.url}`
                                 : imagesPreLoad[0]
                         }
                     />
                     <NewArtInputCover
                         UploadUserAvatar={UploadUserAvatar}
                         imagesPreLoad={
-                            props?.getChoseAdv?.images[1]?.url ||
-                            imagesPreLoad[1]
+                            props?.getChoseAdv?.images[1]?.url
+                                ? `http://localhost:8090/${props?.getChoseAdv?.images[1]?.url}`
+                                : imagesPreLoad[1]
                         }
                     />
                     <NewArtInputCover
                         UploadUserAvatar={UploadUserAvatar}
                         imagesPreLoad={
-                            props?.getChoseAdv?.images[2]?.url ||
-                            imagesPreLoad[2]
+                            props?.getChoseAdv?.images[2]?.url
+                                ? `http://localhost:8090/${props?.getChoseAdv?.images[2]?.url}`
+                                : imagesPreLoad[2]
                         }
                     />
                     <NewArtInputCover
                         UploadUserAvatar={UploadUserAvatar}
                         imagesPreLoad={
-                            props?.getChoseAdv?.images[3]?.url ||
-                            imagesPreLoad[3]
+                            props?.getChoseAdv?.images[3]?.url
+                                ? `http://localhost:8090/${props?.getChoseAdv?.images[3]?.url}`
+                                : imagesPreLoad[3]
                         }
                     />
                     <NewArtInputCover
                         UploadUserAvatar={UploadUserAvatar}
                         imagesPreLoad={
-                            props?.getChoseAdv?.images[4]?.url ||
-                            imagesPreLoad[4]
+                            props?.getChoseAdv?.images[4]?.url
+                                ? `http://localhost:8090/${props?.getChoseAdv?.images[4]?.url}`
+                                : imagesPreLoad[4]
                         }
                     />
                 </div>
