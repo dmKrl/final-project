@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { Link } from 'react-router-dom';
-import FormModal from '../../components/form-modals/FormModal';
+import FormModalAdd from '../../components/form-modals/FormModalAdd';
 import HeadingH3 from '../../components/heading-h3/HeadingH3';
 import s from './AddNewAdv.module.css';
 
@@ -16,7 +16,7 @@ function AddNewAdv() {
                                 <div className={s.modalBtnCloseLine} />
                             </Link>
                         </div>
-                        <FormModal />
+                        <FormModalAdd />
                     </div>
                 </div>
             </div>

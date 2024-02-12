@@ -1,7 +1,6 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useForm } from 'react-hook-form';
-import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import s from '../../modals/add-new-adv/AddNewAdv.module.css';
@@ -13,8 +12,7 @@ import {
 } from '../../redux/slices/adsSlice';
 import NewArtInputCover from '../UI/new-art-input-cover/NewArtInputCover';
 
-function FormModal(props) {
-    const location = useLocation();
+function FormModalAdd(props) {
     const dispatch = useDispatch();
     const [images, setImages] = useState([]);
     const {
@@ -25,7 +23,6 @@ function FormModal(props) {
     } = useForm({ mode: 'onBlur' });
     const imagesPreLoad = useSelector(selectImagesPreLoad);
     const [postAdvWithOnlyText] = adsAPI.usePostAdvWithOnlyTextMutation();
-    const [updatePost] = adsAPI.useUpdateUserAdvMutation();
     const [postImagesAdv] = adsAPI.usePostImagesAdvMutation();
 
     function changePreLoadImage(selectedImage) {
@@ -57,35 +54,20 @@ function FormModal(props) {
     }
 
     function onSubmit(data) {
-        if (location.pathname === '/add-new-adv') {
-            postAdvWithOnlyText(data)
-                .unwrap()
-                .then(async (response) => {
-                    if (images) {
-                        for (let i = 0; i < images.length; i++) {
-                            postImagesAdv({ data: images[i], pk: response.id });
-                        }
-                        setTimeout(() => {
-                            clearStatesWithImages();
-                            redirectToAdvPage(response.id);
-                        }, 200);
+        postAdvWithOnlyText(data)
+            .unwrap()
+            .then(async (response) => {
+                if (images) {
+                    for (let i = 0; i < images.length; i++) {
+                        postImagesAdv({ data: images[i], pk: response.id });
                     }
-                });
-        } else {
-            updatePost({ data, pk: props.choseAdvID })
-                .unwrap()
-                .then(async (response) => {
-                    if (images) {
-                        for (let i = 0; i < images.length; i++) {
-                            postImagesAdv({ data: images[i], pk: response.id });
-                        }
-                        setTimeout(() => {
-                            clearStatesWithImages();
-                            redirectToAdvPage(response.id);
-                        }, 200);
-                    }
-                });
-        }
+                    setTimeout(() => {
+                        clearStatesWithImages();
+                        redirectToAdvPage(response.id);
+                    }, 200);
+                }
+            });
+
         reset();
     }
 
@@ -175,4 +157,4 @@ function FormModal(props) {
     );
 }
 
-export default FormModal;
+export default FormModalAdd;
