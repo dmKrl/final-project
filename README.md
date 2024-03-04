@@ -26,7 +26,7 @@ React Router
 CSS Modules  
 
 ## Установка и запуск проекта:
-Необходимо кланировать репозиторий: git repo clone dm_krl/final-project;  
+Необходимо кланировать репозиторий: git repo clone dm_krl/sky-avito;  
 Установить заисимости: npm install;  
 Запустить приложение: npm run start;  
 Откройте http://localhost:3000, чтобы просмотреть приложение.  
