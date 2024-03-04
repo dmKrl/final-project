@@ -18,12 +18,12 @@
 
 
 ## Технический стек:
-React
-Redux
-Docker
-REST API
-React Router
-CSS Modules
+React  
+Redux  
+Docker  
+REST API  
+React Router  
+CSS Modules  
 
 ## Установка и запуск проекта:
 Необходимо кланировать репозиторий: git repo clone dm_krl/final-project;  
